@@ -6,17 +6,23 @@ typedef struct player_s
     int x;
     int y;
 
+    int destX;
+    int destY;
+
+    DIR_E 
+
     float speed;
 
 } player_t;
 
 
-player_t create_player();
-void destroy_player();
+player_t* create_player();
+void destroy_player(player_t* player);
 
-void move_player(game_t game);
 
-void check_wall_collision(game_t game);
+void player_update_destination(game_t* game);
+void player_move(game_t* game);
+
 
 
 
