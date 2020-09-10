@@ -3,6 +3,8 @@
 
 typedef struct game_s
 {
+    draw_t* draw;
+
     input_t* input;
     player_t* player;
     

@@ -1,12 +1,12 @@
 #ifndef __DEFS__
 #define __DEFS__
 
-#define WIDTH
-#define HEIGHT
+#define WIDTH 800
+#define HEIGHT 600
 
 
 
-#define MAX_ENEMIES
+#define MAX_ENEMIES 4
 
 
 
