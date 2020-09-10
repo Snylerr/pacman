@@ -1,6 +1,8 @@
 #ifndef __DRAW__
 #define __DRAW__
 
+#include <SDL2/sdl.h>
+
 typedef struct draw_s
 {
     SDL_WINDOW window;
