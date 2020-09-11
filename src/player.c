@@ -19,13 +19,10 @@ player_t* create_player()
 	player->destY = player->y;
 
     player->speed = PLAYER_SPEED;
-<<<<<<< HEAD
 
     player->dir = -1;
-=======
-	
+
 	return player;
->>>>>>> a99313063a2c059e97945b9e6b54ce7818143b2e
 }
 
 void destroy_player(player_t* player)
@@ -50,15 +47,15 @@ void player_update_destination(game_t* game)
     {
         player->dir = 0;
     }
-    else if (input->down && y < BOARD_HEIGHT - 1 && !board->cells[x][y + 1].is_wall)
+    else if (input->down && y < BOARD_HEIGHT - 1 && !board->cells[x + (y + 1) * board->width].is_wall)
     {
         player->dir = 1;
     }
-    else if (input->left && x > 0 && !board->cells[x-1][y].is_wall)
+    else if (input->left && x > 0 && !board->cells[x-1 + y * board->width].is_wall)
     {
         player->dir = 2;
     }
-    else if (input->right && x < BOARD_WIDTH - 1 && !board->cells[x+1][y].is_wall)
+    else if (input->right && x < BOARD_WIDTH - 1 && !board->cells[x+1 + y * board->width].is_wall)
     {
         player->dir = 3;
     } 
@@ -69,29 +66,17 @@ void player_update_destination(game_t* game)
         player->destX = x * UNIT_SIZE;
         player->destY = (y - 1) * UNIT_SIZE;
     }
-<<<<<<< HEAD
     else if (player->dir == 1)
-=======
-    else if (input->down && y < BOARD_HEIGHT - 1 && !board->cells[x + (y + 1) * board->width].is_wall)
->>>>>>> a99313063a2c059e97945b9e6b54ce7818143b2e
     {
         player->destX = x * UNIT_SIZE;
         player->destY = (y + 1) * UNIT_SIZE;
     }
-<<<<<<< HEAD
     else if (player->dir == 2)
-=======
-    else if (input->left && x > 0 && !board->cells[(x - 1) + y * board->width].is_wall)
->>>>>>> a99313063a2c059e97945b9e6b54ce7818143b2e
     {
         player->destX = (x - 1) * UNIT_SIZE;
         player->destY = y * UNIT_SIZE;
     }
-<<<<<<< HEAD
     else if (player->dir == 3)
-=======
-    else if (input->right && x < BOARD_WIDTH - 1 && !board->cells[(x + 1) + y * board->width].is_wall)
->>>>>>> a99313063a2c059e97945b9e6b54ce7818143b2e
     {
         player->destX = (x + 1) * UNIT_SIZE;
         player->destY = y * UNIT_SIZE;
