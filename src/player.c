@@ -55,7 +55,7 @@ void player_update_destination(game_t* game)
     }
 }
 
-void player_move(game_t* game)
+void player_move(game_t* game, Uint32 deltaTicks)
 {
     if (game == NULL)
         return;
@@ -70,15 +70,17 @@ void player_move(game_t* game)
         player_update_destination(game);
     }
 
+    float vel = player->speed * (deltaTicks / 1000f);
+
     // ELSE WE MOVE FORWARD
     if (player->destX < player->x)
-        player->x -= 1;
+        player->x -= vel;
     else
-        player->x += 1;
+        player->x += vel;
 
     if (player->destY < player->y)
-        player->y -= 1;
+        player->y -= vel;
     else
-        player->x += 1;
+        player->x += vel;
     
 }

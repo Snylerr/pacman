@@ -19,7 +19,7 @@ void destroy_player(player_t* player);
 
 
 void player_update_destination(game_t* game);
-void player_move(game_t* game);
+void player_move(game_t* game, Uint32 deltaTicks);
 
 
 
