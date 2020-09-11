@@ -8,11 +8,11 @@
 
 typedef struct s_game t_game;
 
-typedef struct s_tile
+typedef struct
 {
 	int width, height;
 	int row, column;
-}t_tile;
+}tile_t;
 
 void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer);
 
