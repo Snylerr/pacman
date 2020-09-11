@@ -7,9 +7,7 @@ typedef struct player_s
     int y;
 
     int destX;
-    int destY;
-
-    DIR_E 
+    int destY; 
 
     float speed;
 

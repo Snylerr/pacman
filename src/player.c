@@ -82,7 +82,3 @@ void player_move(game_t* game)
         player->x += 1;
     
 }
-
-
-in
-
