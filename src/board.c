@@ -1,6 +1,12 @@
 #include "board.h"
+#include "map.h"
 
-board_t* create_board(game_t game)
+cell_t* create_cell()
+{
+	
+}
+
+board_t* create_board()
 {
 	board_t* board = malloc(sizeof(board_t));
 	

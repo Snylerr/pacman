@@ -25,8 +25,6 @@ typedef struct
 
 cell_t* create_cell();
 
-
-
 board_t* create_board();
 
 void destroy_board(board_t* board);
