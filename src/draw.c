@@ -23,7 +23,6 @@ void draw_board(game_t* game)
 	board_t* board = game->board;
 	
 	SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
-	SDL_RenderClear(game->draw->renderer);
 	
 	for (int i = 0; i < board->height; ++i)
 	{
@@ -36,4 +35,11 @@ void draw_board(game_t* game)
 			}
 		}
 	}
+}
+
+void draw_player(game_t* game)
+{
+	SDL_SetRenderDrawColor(game->draw->renderer, 255, 255, 0, 255);
+	SDL_Rect rect = {game->player->x, game->player->y, UNIT_SIZE, UNIT_SIZE};
+	SDL_RenderDrawRect(game->draw->renderer, &rect);
 }

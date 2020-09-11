@@ -68,10 +68,10 @@ void player_move(game_t* game, float deltaTicks)
     player_t* player = game->player;
 
     // PLAYER IS ON DESTINATION
-    if (player->x == player->destX && player->y == player->destY)
-    {
+    // if (player->x == player->destX && player->y == player->destY)
+    // {
         player_update_destination(game);
-    }
+    // }
 
     float vel = player->speed * (deltaTicks / 1000.f);
 

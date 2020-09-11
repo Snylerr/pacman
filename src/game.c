@@ -65,8 +65,13 @@ void game_main_loop(game_t* game)
         {
         
         }
-
-        // Move player
+		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 255, 255);
+		SDL_RenderClear(game->draw->renderer);
+		
+		draw_board(game);
+		draw_player(game);
+		// Move player
+		
         player_update_destination(game);
         player_move(game, delta);
 
