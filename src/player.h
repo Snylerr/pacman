@@ -9,6 +9,8 @@ typedef struct player_s
     int destX;
     int destY; 
 
+    int dir;
+
     float speed;
 
 } player_t;
