@@ -20,18 +20,18 @@ input_t* create_input()
 
 void destroy_input(input_t* input)
 {
-    free(my_input);
+    free(input);
 }
 
 void input_process(input_t* input)
 {
-    SDL_EVENT event;
+    SDL_Event event;
     while (SDL_PollEvent(&event))
     {
         switch (event.type)
         {
             case SDL_QUIT:
-                my_input->exit = 1;
+                input->exit = 1;
                 break;
             case SDL_KEYDOWN:
                 input_key_down(input, &event.key);

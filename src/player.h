@@ -1,6 +1,8 @@
 #ifndef __PLAYER__
 #define __PLAYER__
 
+typedef struct game_s game_t;
+
 typedef struct player_s
 {
     int x;
@@ -19,7 +21,7 @@ void destroy_player(player_t* player);
 
 
 void player_update_destination(game_t* game);
-void player_move(game_t* game, Uint32 deltaTicks);
+void player_move(game_t* game, float deltaTicks);
 
 
 

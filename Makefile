@@ -1,7 +1,8 @@
-CFLAGS=-Wall -Wextra -g -fsanitize=address
+
+CFLAGS=-Wall -Wextra -g
 CPPFLAGS=-MMD -Iinclude
 LDFLAGS=
-LDLIBS=-lm -lSDL2 -lSDL2_image
+LDLIBS= -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
 SRCS=$(wildcard src/*.c)
 FILES=$(subst src/,,$(SRCS))
@@ -16,11 +17,10 @@ all: bin/pacman
 -include $(DEPS)
 
 obj/%.o: src/%.c
-	gcc -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 bin/pacman: $(OBJS)
-	gcc $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 clean:
 	rm -f $(OBJS) $(DEPS) bin/pacman
-

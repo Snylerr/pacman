@@ -5,6 +5,7 @@
 #include "player.h"
 #include "draw.h"
 #include "board.h"
+#include "enemy.h"
 
 typedef struct game_s
 {

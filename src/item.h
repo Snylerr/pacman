@@ -7,6 +7,6 @@ typedef enum
 	E_BIG_PILL,
 	
 	E_COUNT
-}E_ITEM
+}E_ITEM;
 
 #endif
