@@ -1,6 +1,7 @@
 #ifndef __BOARD_H_
 #define __BOARD_H_
 
+#include "item.h"
 
 typedef struct
 {
@@ -9,9 +10,14 @@ typedef struct
 
 typedef struct
 {
+	tile_t tile;
+	
+	int x, y;
+	
     bool is_wall;
 
     // ITEM INSIDE CELL
+	E_ITEM item;
 
 } cell_t;
 
