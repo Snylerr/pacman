@@ -3,6 +3,8 @@
 
 #include <SDL2/sdl.h>
 
+#include "board.h"
+
 typedef struct draw_s
 {
     SDL_WINDOW window;
