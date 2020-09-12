@@ -2,6 +2,8 @@
 #include "defs.h"
 #include "game.h"
 
+const int unit_half = UNIT_SIZE / 2;
+
 
 draw_t* create_draw()
 {
@@ -29,11 +31,11 @@ void draw_board(game_t* game)
 			if(board->cells[j + i * board->width].is_wall)
 			{
 				SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
-				SDL_Rect rect = {j * UNIT_SIZE, i * UNIT_SIZE, UNIT_SIZE, UNIT_SIZE};
+				SDL_Rect rect = {j * UNIT_SIZE - unit_half, i * UNIT_SIZE - unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderFillRect(game->draw->renderer, &rect);
 				
 				SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
-				SDL_Rect rect_ = {j * UNIT_SIZE, i * UNIT_SIZE, UNIT_SIZE, UNIT_SIZE};
+				SDL_Rect rect_ = {j * UNIT_SIZE - unit_half, i * UNIT_SIZE - unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderDrawRect(game->draw->renderer, &rect_);
 			}
 		}
@@ -43,6 +45,6 @@ void draw_board(game_t* game)
 void draw_player(game_t* game)
 {
 	SDL_SetRenderDrawColor(game->draw->renderer, 255, 255, 0, 255);
-	SDL_Rect rect = {game->player->x, game->player->y, UNIT_SIZE, UNIT_SIZE};
+	SDL_Rect rect = {game->player->x - unit_half, game->player->y - unit_half, UNIT_SIZE, UNIT_SIZE};
 	SDL_RenderDrawRect(game->draw->renderer, &rect);
 }

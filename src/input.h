@@ -5,12 +5,12 @@
 
 #include <stdbool.h>
 
+#include "defs.h"
+
 typedef struct input_s
 {
-    bool up;
-    bool down;
-    bool left;
-    bool right;
+    E_DIR dir;
+
 
     bool enter;
     bool escape;
@@ -26,7 +26,7 @@ void destroy_input(input_t* input);
 void input_process(input_t* input);
 
 void input_key_down(input_t* input, SDL_KeyboardEvent* event);
-
-void set_input(input_t* input, int up, int down, int left, int right);
+void input_key_up(input_t* input, SDL_KeyboardEvent* event);
+void set_input(input_t* input, E_DIR dir);
 
 #endif

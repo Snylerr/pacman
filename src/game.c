@@ -43,7 +43,7 @@ void game_main_loop(game_t* game)
     float delta = 0.f;
 
 
-	SDL_SetRenderDrawColor(game->draw->renderer, 0, 255, 0, 255);
+	SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 
     bool running = true;
     
@@ -65,7 +65,7 @@ void game_main_loop(game_t* game)
         {
         
         }
-		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 255, 255);
+		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(game->draw->renderer);
 		
 		draw_board(game);

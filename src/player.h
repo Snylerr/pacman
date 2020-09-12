@@ -1,17 +1,21 @@
 #ifndef __PLAYER__
 #define __PLAYER__
 
+#include "defs.h"
+
 typedef struct game_s game_t;
+
+
 
 typedef struct player_s
 {
-    int x;
-    int y;
+    float x;
+    float y;
 
-    int destX;
-    int destY; 
+    float destX;
+    float destY; 
 
-    int dir;
+    E_DIR dir;
 
     float speed;
 
