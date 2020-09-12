@@ -41,7 +41,7 @@ float abs_(float x)
 bool player_ready_to_move(player_t* player)
 {
     return abs_(player->x - player->destX) < MARGE && abs_(player->y - player->destY) < MARGE;
-} // ok mais il bouge plus la
+}
 
 void player_update_destination(game_t* game)
 {
@@ -52,8 +52,8 @@ void player_update_destination(game_t* game)
     input_t* input = game->input;
     player_t* player = game->player;
 
-    int x = (player->x - OFFSET) / UNIT_SIZE;
-    int y = (player->y - OFFSET) / UNIT_SIZE;
+    int x = (player->x - OFFSET) / (int)UNIT_SIZE;
+    int y = (player->y - OFFSET) / (int)UNIT_SIZE;
 
     if (input->dir == UP && y > 0 && !board->cells[x + (y - 1) * board->width].is_wall)
     {
@@ -76,26 +76,26 @@ void player_update_destination(game_t* game)
     if (player->dir == UP && player_ready_to_move(player))
     {
         printf("GO UP PLZ\n");
-        player->destX = x       * UNIT_SIZE + OFFSET;
+        player->destX = player->x;
         player->destY = (y - 1) * UNIT_SIZE + OFFSET;
     }
     else if (player->dir == DOWN && player_ready_to_move(player))
     {
         printf("GO DOWN PLZ\n");
-        player->destX = x       * UNIT_SIZE + OFFSET;
+        player->destX = player->x;
         player->destY = (y + 1) * UNIT_SIZE + OFFSET;
     }
     else if (player->dir == LEFT && player_ready_to_move(player))
     {
         printf("GO LEFT PLZ\n");
         player->destX = (x - 1) * UNIT_SIZE + OFFSET;
-        player->destY = y       * UNIT_SIZE + OFFSET;
+        player->destY = player->y;
     }
     else if (player->dir == RIGHT && player_ready_to_move(player))
     {
         printf("GO RIGHT PLZ\n");
         player->destX = (x + 1) * UNIT_SIZE + OFFSET;
-        player->destY = y       * UNIT_SIZE + OFFSET;
+        player->destY = player->y;
     }
 }
 
@@ -112,29 +112,32 @@ void player_move(game_t* game, float deltaTicks)
     }
 
     float vel = player->speed * (deltaTicks / 1000.f);
-    //printf("%f", vel);
-    // ELSE WE MOVE FORWARD
-    if (player->destX < player->x)
-    {
-        printf("going LEFT\n");
-        player->x -= vel;
-    }
-    else if (player->destX > player->x)
-    {
-        printf("going RIGHT\n");
-        player->x += vel;
-    }
-    else if (player->destY < player->y)
-    {
-        printf("going UP\n");
-        player->y -= vel;
-    }
-    else if (player->destY > player->y)
-    {
-        printf("going DOWN\n");
-        player->x += vel;
-    }
 
-    
+    printf("POSX = %i && DESTX = %i \n", (int)(player->x), (int)(player->destX));
+
+    // WE MOVE FORWARD IN OUR DIRECTION
+    if (!player_ready_to_move(player))
+    {
+        if (player->destX < player->x)
+        {
+            //printf("going LEFT\n");
+            player->x -= vel;
+        }
+        else if (player->destX > player->x)
+        {
+            //printf("going RIGHT\n");
+            player->x += vel;
+        }
+        else if (player->destY < player->y)
+        {
+            //printf("going UP\n");
+            player->y -= vel;
+        }
+        else if (player->destY > player->y)
+        {
+            //printf("going DOWN\n");
+            player->x += vel;
+        }
+    }   
     
 }

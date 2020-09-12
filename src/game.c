@@ -63,7 +63,11 @@ void game_main_loop(game_t* game)
         // PAUSE GAME
         if (game->input->escape)
         {
-        
+            game->input->escape = false;
+            while (!game->input->escape)
+            {
+                // PAUSE
+            }
         }
 		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(game->draw->renderer);
