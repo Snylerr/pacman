@@ -14,11 +14,10 @@
 
 #define OFFSET 32
 
-#define MARGE 0.01f
-
 #define PLAYER_START_X 15
 #define PLAYER_START_Y 14
-#define PLAYER_SPEED 80
+#define PLAYER_SPEED 96
+
 
 #define MAX_ENEMIES 4
 

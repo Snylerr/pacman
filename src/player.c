@@ -15,12 +15,11 @@ player_t* create_player()
 
     player->x = PLAYER_START_X * UNIT_SIZE + OFFSET;
     player->y = PLAYER_START_Y * UNIT_SIZE + OFFSET;
-	
+
 	player->destX = player->x;
 	player->destY = player->y;
     player->newdestX = player->x;
     player->newdestY = player->y;
-
 
     player->speed = PLAYER_SPEED;
 
@@ -40,34 +39,34 @@ void player_process(game_t* game, float deltaTicks)
 {
     board_t* board = game->board;
     input_t* input = game->input;
-    player_t* player = game->player;
+    player_t* player = game->player; 
 
-    
-     
-    player_update_direction(board, input->dir, player);
-    //if (player->destX == player->newdestX && player->destY == player->newdestY)
-            
+    player_update_direction(board, input->dir, player);            
 
     if (player_check_destination(player))
     {
         float velocity = player->speed * deltaTicks;
+
         player_update_position(player, velocity);
+
+       
+
     }
-    else
+    
+    if (!player_check_destination(player))
     {
         if (player->dir == player->newdir)
+        {
+            player->x = player->destX;
+            player->y = player->destY;
             player_update_direction(board, player->dir, player);
+        }
+        
         player->dir = player->newdir;
         player->destX = player->newdestX;
         player->destY = player->newdestY;
-        
-        //printf("POSX = %f && DESTX = %f \n", (player->x), (player->destX));
-    }      
-  
-    
+    }
 
-
- 
     // DEBUG
     //printf("POSX = %f && DESTX = %f \n", (player->x), (player->destX));
 }
@@ -76,7 +75,6 @@ bool player_check_destination(player_t* player)
 {
     if (player->dir == NONE)
         player->dir = player->newdir;
-
 
     switch(player->dir)
     {
@@ -90,7 +88,6 @@ bool player_check_destination(player_t* player)
             return player->x < player->destX;
         default:
             break;
-
     }
     return false;
 }
@@ -154,7 +151,6 @@ void player_update_position(player_t* player, float velocity)
     {
         case UP:
             player->y -= velocity;
-
             player->x = player->destX;
             break;
         case DOWN:
