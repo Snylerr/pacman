@@ -76,8 +76,7 @@ void game_main_loop(game_t* game)
 		draw_player(game);
 		// Move player
 		
-        player_update_destination(game);
-        player_move(game, delta);
+        player_process(game, delta);
 
 		SDL_RenderPresent(game->draw->renderer);
 

@@ -3,8 +3,12 @@
 
 #include "defs.h"
 
-typedef struct game_s game_t;
+#include <stdbool.h>
 
+
+typedef struct game_s game_t;
+typedef struct board_s board_t;
+typedef struct input_s input_t;
 
 
 typedef struct player_s
@@ -14,20 +18,28 @@ typedef struct player_s
 
     float destX;
     float destY; 
-
+    float newdestX;
+    float newdestY;
+    
     E_DIR dir;
+    E_DIR newdir;
 
     float speed;
 
 } player_t;
 
-
+// CREATION & DESTRUCTION
 player_t* create_player();
 void destroy_player(player_t* player);
 
+// MAIN PLAYER UPDATE LOOP
+void player_process(game_t* game, float deltaTicks);
 
-void player_update_destination(game_t* game);
-void player_move(game_t* game, float deltaTicks);
+// Dependencies
+bool player_check_destination(player_t* player);
+void player_update_direction(board_t* board, E_DIR dir, player_t* player);
+void player_update_destination(player_t* player);
+void player_update_position(player_t* player, float velocity);
 
 
 

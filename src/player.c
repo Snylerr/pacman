@@ -3,6 +3,7 @@
 #include "game.h"
 
 
+
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <stdio.h>
@@ -17,10 +18,14 @@ player_t* create_player()
 	
 	player->destX = player->x;
 	player->destY = player->y;
+    player->newdestX = player->x;
+    player->newdestY = player->y;
+
 
     player->speed = PLAYER_SPEED;
 
     player->dir = NONE;
+    player->newdir = NONE;
 
 	return player;
 }
@@ -31,113 +36,140 @@ void destroy_player(player_t* player)
 }
 
 
-float abs_(float x)
+void player_process(game_t* game, float deltaTicks)
 {
-    if (x < 0)
-        return -x;
-    return x;
-}
-
-bool player_ready_to_move(player_t* player)
-{
-    return abs_(player->x - player->destX) < MARGE && abs_(player->y - player->destY) < MARGE;
-}
-
-void player_update_destination(game_t* game)
-{
-    if (game == NULL)
-        return;
-
     board_t* board = game->board;
     input_t* input = game->input;
     player_t* player = game->player;
 
-    int x = (player->x - OFFSET) / (int)UNIT_SIZE;
-    int y = (player->y - OFFSET) / (int)UNIT_SIZE;
+    
+     
+    player_update_direction(board, input->dir, player);
+    //if (player->destX == player->newdestX && player->destY == player->newdestY)
+            
 
-    if (input->dir == UP && y > 0 && !board->cells[x + (y - 1) * board->width].is_wall)
+    if (player_check_destination(player))
     {
-        player->dir = UP;
+        float velocity = player->speed * deltaTicks;
+        player_update_position(player, velocity);
     }
-    else if (input->dir == DOWN && y < BOARD_HEIGHT - 1 && !board->cells[x + (y + 1) * board->width].is_wall)
+    else
     {
-        player->dir = DOWN;
-    }
-    else if (input->dir == LEFT && x > 0 && !board->cells[x - 1 + y * board->width].is_wall)
-    {
-        player->dir = LEFT;
-    }
-    else if (input->dir == RIGHT && x < BOARD_WIDTH - 1 && !board->cells[x + 1 + y * board->width].is_wall)
-    {
-        player->dir = RIGHT;
-    } 
+        if (player->dir == player->newdir)
+            player_update_direction(board, player->dir, player);
+        player->dir = player->newdir;
+        player->destX = player->newdestX;
+        player->destY = player->newdestY;
+        
+        //printf("POSX = %f && DESTX = %f \n", (player->x), (player->destX));
+    }      
+  
+    
 
 
-    if (player->dir == UP && player_ready_to_move(player))
+ 
+    // DEBUG
+    //printf("POSX = %f && DESTX = %f \n", (player->x), (player->destX));
+}
+
+bool player_check_destination(player_t* player)
+{
+    if (player->dir == NONE)
+        player->dir = player->newdir;
+
+
+    switch(player->dir)
     {
-        printf("GO UP PLZ\n");
-        player->destX = player->x;
-        player->destY = (y - 1) * UNIT_SIZE + OFFSET;
+        case UP:
+            return player->y > player->destY;
+        case DOWN:
+            return player->y < player->destY;
+        case LEFT:
+            return player->x > player->destX;
+        case RIGHT:
+            return player->x < player->destX;
+        default:
+            break;
+
     }
-    else if (player->dir == DOWN && player_ready_to_move(player))
+    return false;
+}
+
+
+
+void player_update_direction(board_t* board, E_DIR dir, player_t* player)
+{
+    int x = (player->destX - OFFSET) / (int)UNIT_SIZE;
+    int y = (player->destY - OFFSET) / (int)UNIT_SIZE;
+
+    //printf("x = %i & y = %i\n", x, y);
+
+    switch(dir)
     {
-        printf("GO DOWN PLZ\n");
-        player->destX = player->x;
-        player->destY = (y + 1) * UNIT_SIZE + OFFSET;
-    }
-    else if (player->dir == LEFT && player_ready_to_move(player))
-    {
-        printf("GO LEFT PLZ\n");
-        player->destX = (x - 1) * UNIT_SIZE + OFFSET;
-        player->destY = player->y;
-    }
-    else if (player->dir == RIGHT && player_ready_to_move(player))
-    {
-        printf("GO RIGHT PLZ\n");
-        player->destX = (x + 1) * UNIT_SIZE + OFFSET;
-        player->destY = player->y;
+        case UP:
+            if (y > 0 && !board->cells[x + (y - 1) * board->width].is_wall)
+            {                         
+                player->newdir = UP;
+                player->newdestX = x * UNIT_SIZE + OFFSET;
+                player->newdestY = (y - 1) * UNIT_SIZE + OFFSET;
+                return;
+            }
+            break;
+        case DOWN:
+            if (y < BOARD_HEIGHT - 1 && !board->cells[x + (y + 1) * board->width].is_wall)
+            {
+                player->newdir = DOWN;
+                player->newdestX = x * UNIT_SIZE + OFFSET;
+                player->newdestY = (y + 1) * UNIT_SIZE + OFFSET;
+                return;
+            }
+            break;
+        case LEFT:
+            if (x > 0 && !board->cells[x - 1 + y * board->width].is_wall)
+            {
+                player->newdir = LEFT;
+                player->newdestX = (x - 1) * UNIT_SIZE + OFFSET;
+                player->newdestY = y * UNIT_SIZE + OFFSET;
+                return;
+            }
+            break;
+        case RIGHT:
+            if (x < BOARD_WIDTH - 1 && !board->cells[x + 1 + y * board->width].is_wall)
+            {
+                player->newdir = RIGHT;
+                player->newdestX = (x + 1) * UNIT_SIZE + OFFSET;
+                player->newdestY = y * UNIT_SIZE + OFFSET;
+                return;
+            }
+            break;
+        default:
+            break;
     }
 }
 
-void player_move(game_t* game, float deltaTicks)
+
+void player_update_position(player_t* player, float velocity)
 {
-    if (game == NULL)
-        return;
-
-    player_t* player = game->player;
-
-    if (player->dir == NONE || player_ready_to_move(player))
+    switch(player->dir)
     {
-        player_update_destination(game);
+        case UP:
+            player->y -= velocity;
+
+            player->x = player->destX;
+            break;
+        case DOWN:
+            player->y += velocity;
+            player->x = player->destX;
+            break;
+        case LEFT:
+            player->x -= velocity;
+            player->y = player->destY;
+            break;
+        case RIGHT:
+            player->x += velocity;
+            player->y = player->destY;
+            break;
+        default:
+            break;
     }
-
-    float vel = player->speed * (deltaTicks / 1000.f);
-
-    printf("POSX = %i && DESTX = %i \n", (int)(player->x), (int)(player->destX));
-
-    // WE MOVE FORWARD IN OUR DIRECTION
-    if (!player_ready_to_move(player))
-    {
-        if (player->destX < player->x)
-        {
-            //printf("going LEFT\n");
-            player->x -= vel;
-        }
-        else if (player->destX > player->x)
-        {
-            //printf("going RIGHT\n");
-            player->x += vel;
-        }
-        else if (player->destY < player->y)
-        {
-            //printf("going UP\n");
-            player->y -= vel;
-        }
-        else if (player->destY > player->y)
-        {
-            //printf("going DOWN\n");
-            player->x += vel;
-        }
-    }   
-    
 }

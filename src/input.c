@@ -35,7 +35,7 @@ void input_process(input_t* input)
                 input_key_down(input, &event.key);
                 break;
             case SDL_KEYUP:
-                input_key_up(input, &event.key);
+                //input_key_up(input, &event.key);
                 break;
             default:
                 break;

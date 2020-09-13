@@ -31,11 +31,11 @@ void draw_board(game_t* game)
 			if(board->cells[j + i * board->width].is_wall)
 			{
 				SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
-				SDL_Rect rect = {j * UNIT_SIZE - unit_half, i * UNIT_SIZE - unit_half, UNIT_SIZE, UNIT_SIZE};
+				SDL_Rect rect = {j * UNIT_SIZE + OFFSET - unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderFillRect(game->draw->renderer, &rect);
 				
 				SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
-				SDL_Rect rect_ = {j * UNIT_SIZE - unit_half, i * UNIT_SIZE - unit_half, UNIT_SIZE, UNIT_SIZE};
+				SDL_Rect rect_ = {j * UNIT_SIZE + OFFSET- unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderDrawRect(game->draw->renderer, &rect_);
 			}
 		}
