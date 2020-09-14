@@ -84,6 +84,8 @@ void read_map_file(char const* file_path, board_t* board)
 			cell.is_wall = is_hashtag(c);
 
 			cell.is_border = is_X(c);
+			if (cell.is_border)
+				cell.is_wall = true;
 
 			board->cells[j + i * board->width] = cell;
 		}

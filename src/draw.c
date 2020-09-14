@@ -2,6 +2,8 @@
 #include "defs.h"
 #include "game.h"
 
+#include <SDL2/SDL_ttf.h>
+
 const int unit_half = UNIT_SIZE / 2;
 
 draw_t* create_draw()
@@ -19,6 +21,23 @@ draw_t* create_draw()
 	return draw;
 }
 
+void draw_debug(game_t* game)
+{
+	TTF_Font* font = TTF_OpenFont("include/Roboto-Black.ttf", 16);
+	SDL_Color White = {255, 255, 255, 255};
+	
+	SDL_Surface* surface = TTF_RenderText_Solid(font, "Debug mode is on", White);
+	
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(game->draw->renderer, surface);
+	
+	SDL_Rect rect = {0, 0, 1024, 16};
+	
+	SDL_RenderCopy(game->draw->renderer, texture, NULL, &rect);
+	
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
+}
+
 void draw_board(game_t* game)
 {
 	board_t* board = game->board;
@@ -27,12 +46,12 @@ void draw_board(game_t* game)
 	{
 		for (int j = 0; j < board->width; ++j)
 		{
-			if(board->cells[j + i * board->width].is_wall || board->cells[j + i * board->width].is_border)
+			if(board->cells[j + i * board->width].is_wall)
 			{
-				if (board->cells[j + i * board->width].is_wall)
-					SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
-				else if (board->cells[j + i * board->width].is_border)
+				if (board->cells[j + i * board->width].is_border)
 					SDL_SetRenderDrawColor(game->draw->renderer, 0, 255, 0, 255);
+				else if (board->cells[j + i * board->width].is_wall)
+					SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
 				SDL_Rect rect = {j * UNIT_SIZE + OFFSET - unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderFillRect(game->draw->renderer, &rect);
 			}

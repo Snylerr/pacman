@@ -10,6 +10,7 @@ input_t* create_input()
 
     input->enter = 0;
     input->escape = 0;
+	input->debug = 0;
 
     input->exit = 0;
 
@@ -53,6 +54,9 @@ void input_key_down(input_t* input, SDL_KeyboardEvent* event)
         case SDL_SCANCODE_ESCAPE:
             input->escape = 1;
             break;
+		case SDL_SCANCODE_F5:
+			input->debug = !input->debug;
+			break;
         case SDL_SCANCODE_UP:
             input->dir = UP;
             break;

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <SDL2/SDL_ttf.h>
+
 
 #include "sdl_utils.h"
 #include "game.h"
@@ -11,6 +13,11 @@
 
 void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer)
 {
+	if (TTF_Init() == -1)
+	{
+		printf("TTF_Init: %s\n", TTF_GetError());
+		return;
+	}
 	if (SDL_Init(SDL_INIT_VIDEO != 0))
 	{
 		printf("Error initializing SDL: %s\n", SDL_GetError());
@@ -33,6 +40,8 @@ void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer
 		printf("Error creating renderer: %s\n", SDL_GetError());
 		return;
 	}
+	
+
 }
 
 SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface)

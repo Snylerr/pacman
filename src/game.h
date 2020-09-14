@@ -1,6 +1,8 @@
 #ifndef __GAME__
 #define __GAME__
 
+#include <stdbool.h>
+
 #include "input.h"
 #include "player.h"
 #include "draw.h"

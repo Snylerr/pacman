@@ -14,6 +14,7 @@ typedef struct input_s
 
     bool enter;
     bool escape;
+	bool debug;
 
     bool exit;
 } input_t;

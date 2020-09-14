@@ -56,6 +56,11 @@ void game_main_loop(game_t* game)
 		delta = counter > 0 ? (current_counter - counter) / (float)frequency : 1.f / 60.f;
 		counter = current_counter;
 		
+		if (game->input->debug)
+		{
+			draw_debug(game);
+		}
+		
         // QUIT GAME INSTANTLY
         if (game->input->exit)
             break;
