@@ -1,8 +1,12 @@
 #ifndef __ENEMY__
 #define __ENEMY__
 
-typedef struct
+#include "sdl_utils.h"
+
+typedef struct enemy_s
 {
+	tile_t* tile;
+	
     int x;
     int y;
 

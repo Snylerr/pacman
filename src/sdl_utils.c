@@ -3,6 +3,8 @@
 
 #include "sdl_utils.h"
 #include "game.h"
+#include "player.h"
+#include "board.h"
 #include "defs.h"
 
 void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer)
@@ -39,17 +41,21 @@ void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer
 	// return texture;
 // }
 
-// void utils_render_cpy(t_game* game, void* master_object, void* object)
-// {
-	// if (game == NULL || master_object == NULL || object == NULL)
-		// return;
+void utils_entity_render_cpy(t_game* game, void* entity)
+{
+	player_t* entity_ = (player_t*)entity;
+	t_tile* entity_tile = entity_->tile;
 
-	// t_items* master_obj = (t_items*)master_object;
-	// t_item* obj = (t_item*)object;
-	// t_tile* object_tile = obj->tile;
+	SDL_Rect src_rect = {entity_tile->column * entity_tile->width, entity_tile->row * entity_tile->height, entity_tile->width, entity_tile->height};
+	SDL_Rect dst_rect = {entity_->x, entity_->y, 32, 32};
 
-	// SDL_Rect src_rect = {object_tile->column * object_tile->width, object_tile->row * object_tile->height, object_tile->width, object_tile->height};
-	// SDL_Rect dst_rect = {obj->pos_x, obj->pos_y, 32, 32};
+	SDL_RenderCopy(game->renderer, entity_->sprite, &src_rect, &dst_rect);
+}
 
-	// SDL_RenderCopy(game->renderer, master_obj->tileset, &src_rect, &dst_rect);
-// }
+void utils_cell_render_cpy(t_game* game, board_t* board, cell_t* cell, int x, int y)
+{
+	SDL_Rect src_rect = {cell_tile->column * cell_tile->width, cell_tile->row * cell_tile->height, cell_tile->width, cell_tile->height};
+	SDL_Rect dst_rect = {x, y, 32, 32};
+
+	SDL_RenderCopy(game->renderer, board->tileset, &src_rect, &dst_rect);
+}

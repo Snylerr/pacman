@@ -12,7 +12,7 @@ typedef struct game_s game_t;
 
 typedef struct cell_s
 {
-	tile_t tile;
+	tile_t* tile;
 	
 	bool is_wall;
 
@@ -24,6 +24,8 @@ typedef struct cell_s
 
 typedef struct board_s
 {
+	SDL_Texture* tileset;
+	
 	int width, height;
 
 	cell_t* cells;

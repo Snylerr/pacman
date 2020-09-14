@@ -2,6 +2,7 @@
 #define __PLAYER__
 
 #include "defs.h"
+#include "sdl_utils.h"
 
 #include <stdbool.h>
 
@@ -13,6 +14,8 @@ typedef struct input_s input_t;
 
 typedef struct player_s
 {
+	tile_t* tile;
+	
     float x;
     float y;
 

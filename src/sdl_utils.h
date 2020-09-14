@@ -18,6 +18,8 @@ void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer
 
 SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface);
 
-void utils_render_cpy(t_game* game, void* master_object, void* object);
+void utils_entity_render_cpy(t_game* game, void* entity);
+
+void utils_cell_render_cpy(t_game* game, board_t* board, cell_t* cell, int x, int y);
 
 #endif
