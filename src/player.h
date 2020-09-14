@@ -31,7 +31,7 @@ typedef struct player_s
 } player_t;
 
 // CREATION & DESTRUCTION
-player_t* create_player();
+player_t* create_player(game_t* game);
 void destroy_player(player_t* player);
 
 // MAIN PLAYER UPDATE LOOP

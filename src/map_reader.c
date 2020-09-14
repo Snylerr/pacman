@@ -14,6 +14,14 @@ bool is_hashtag(char c)
 	return false;
 }
 
+bool is_X(char c)
+{
+	if (c == 'X')
+		return true;
+
+	return false;
+}
+
 int	read_char(FILE* file, char* pointer_c)
 {
 	if (file == NULL || pointer_c == NULL)
@@ -74,6 +82,9 @@ void read_map_file(char const* file_path, board_t* board)
 			char c = line[j];
 			cell_t cell;
 			cell.is_wall = is_hashtag(c);
+
+			cell.is_border = is_X(c);
+
 			board->cells[j + i * board->width] = cell;
 		}
 		line = read_line(file);

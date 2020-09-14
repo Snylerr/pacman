@@ -27,10 +27,10 @@
 
 typedef enum
 {
-    UP,
+    RIGHT,
     DOWN,
     LEFT,
-    RIGHT,
+    UP,
 
     NONE
 }E_DIR;

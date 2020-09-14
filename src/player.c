@@ -9,12 +9,29 @@
 #include <stdio.h>
 
 
-player_t* create_player()
+player_t* create_player(game_t* game)
 {
     player_t* player = malloc(sizeof(player_t));
     player->pos = malloc(sizeof(vector2_t));
     player->dest = malloc(sizeof(vector2_t));
     player->newdest = malloc(sizeof(vector2_t));
+	
+	tile_t* tile = malloc(sizeof(tile_t));
+	
+	tile->width = 32;
+	tile->height = 32;
+	tile->row = 0;
+	tile->column = 0;
+	
+	player->tile = tile;
+
+	SDL_Surface* surface = IMG_Load("assets/pac man & life counter & death/pac man/pac_man_0.png");
+	if (surface == NULL)
+		return NULL;
+	
+	player->sprite = utils_load_texture(game->draw->renderer, surface);
+	
+	SDL_FreeSurface(surface);
 
 	board_to_screen(player->pos, PLAYER_START_X, PLAYER_START_Y);
     board_to_screen(player->dest, PLAYER_START_X, PLAYER_START_Y);
@@ -32,6 +49,7 @@ player_t* create_player()
 
 void destroy_player(player_t* player)
 {
+	free(player->tile);
     free(player->pos);
     free(player->dest);
     free(player->newdest);

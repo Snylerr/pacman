@@ -6,7 +6,7 @@ game_t* create_game()
     game->draw = create_draw();
     game->board = create_board(game);
     game->input = create_input();
-    game->player = create_player();
+    game->player = create_player(game);
 
     game->enemies = create_enemy_list();
 

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "sdl_utils.h"
 #include "game.h"
 #include "player.h"
 #include "board.h"
 #include "defs.h"
+#include "draw.h"
 
 void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer)
 {
@@ -48,11 +50,17 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 	
 	int x = (int)entity_->pos->x;
 	int y = (int)entity_->pos->y;
+	
+	int dir = entity_->dir;
+	
+	int angle = 180 * dir / 2;
+	
+	SDL_Point center = {entity_tile->width / 2, entity_tile->height / 2};
 
-	SDL_Rect src_rect = {entity_tile->width, entity_tile->height, entity_tile->width, entity_tile->height};
-	SDL_Rect dst_rect = {x, y, 32, 32};
+	SDL_Rect src_rect = {0, 0, entity_tile->width, entity_tile->height};
+	SDL_Rect dst_rect = {x - entity_tile->width/2, y - entity_tile->height/2, 32, 32};
 
-	SDL_RenderCopy(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect);
+	SDL_RenderCopyEx(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect, angle, &center, SDL_FLIP_NONE);
 }
 
 void utils_cell_render_cpy(game_t* game, board_t* board, cell_t* cell, int x, int y)
