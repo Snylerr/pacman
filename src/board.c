@@ -39,7 +39,7 @@ void init_board(board_t* board, game_t* game)
 void screen_to_board(vector2_t* vect, float x, float y)
 {
     if (vect == NULL)
-        vect = malloc(sizeof(vector2_t));
+        return;
     vect->x = (x - OFFSET) / UNIT_SIZE;
     vect->y = (y - OFFSET) / UNIT_SIZE;
 }
@@ -47,7 +47,7 @@ void screen_to_board(vector2_t* vect, float x, float y)
 void board_to_screen(vector2_t* vect, int x, int y)
 {
     if (vect == NULL)
-        vect = malloc(sizeof(vector2_t));
+        return;  
     vect->x = x * UNIT_SIZE + OFFSET;
     vect->y = y * UNIT_SIZE + OFFSET;
 }

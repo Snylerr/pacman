@@ -12,11 +12,16 @@
 player_t* create_player()
 {
     player_t* player = malloc(sizeof(player_t));
+    player->pos = malloc(sizeof(vector2_t));
+    player->dest = malloc(sizeof(vector2_t));
+    player->newdest = malloc(sizeof(vector2_t));
 
 	board_to_screen(player->pos, PLAYER_START_X, PLAYER_START_Y);
     board_to_screen(player->dest, PLAYER_START_X, PLAYER_START_Y);
     board_to_screen(player->newdest, PLAYER_START_X, PLAYER_START_Y);    
     
+
+
     player->speed = PLAYER_SPEED;
 
     player->dir = NONE;

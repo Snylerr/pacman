@@ -43,13 +43,13 @@ SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface)
 
 void utils_entity_render_cpy(game_t* game, void* entity)
 {
-	player_t* entity_ = (player_t*)entity;
-	tile_t* entity_tile = entity_->tile;
+	//player_t* entity_ = (player_t*)entity;
+	//tile_t* entity_tile = entity_->tile;
 
-	SDL_Rect src_rect = {entity_tile->width, entity_tile->height, entity_tile->width, entity_tile->height};
-	SDL_Rect dst_rect = {entity_->x, entity_->y, 32, 32};
+	//SDL_Rect src_rect = {entity_tile->width, entity_tile->height, entity_tile->width, entity_tile->height};
+	//SDL_Rect dst_rect = {entity_->x, entity_->y, 32, 32};
 
-	SDL_RenderCopy(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect);
+	//SDL_RenderCopy(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect);
 }
 
 void utils_cell_render_cpy(game_t* game, board_t* board, cell_t* cell, int x, int y)

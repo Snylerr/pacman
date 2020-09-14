@@ -28,7 +28,7 @@ void destroy_game(game_t* game)
 {
     free(game->draw);
     free(game->input);
-    free(game->player);
+    destroy_player(game->player);
     
     // destroy_enemy_list(game->enemies);
 
