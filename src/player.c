@@ -13,14 +13,10 @@ player_t* create_player()
 {
     player_t* player = malloc(sizeof(player_t));
 
-    player->x = PLAYER_START_X * UNIT_SIZE + OFFSET;
-    player->y = PLAYER_START_Y * UNIT_SIZE + OFFSET;
-
-	player->destX = player->x;
-	player->destY = player->y;
-    player->newdestX = player->x;
-    player->newdestY = player->y;
-
+	board_to_screen(player->pos, PLAYER_START_X, PLAYER_START_Y);
+    board_to_screen(player->dest, PLAYER_START_X, PLAYER_START_Y);
+    board_to_screen(player->newdest, PLAYER_START_X, PLAYER_START_Y);    
+    
     player->speed = PLAYER_SPEED;
 
     player->dir = NONE;
@@ -31,6 +27,9 @@ player_t* create_player()
 
 void destroy_player(player_t* player)
 {
+    free(player->pos);
+    free(player->dest);
+    free(player->newdest);
     free(player);
 }
 
@@ -48,23 +47,18 @@ void player_process(game_t* game, float deltaTicks)
         float velocity = player->speed * deltaTicks;
 
         player_update_position(player, velocity);
-
-       
-
     }
     
     if (!player_check_destination(player))
     {
         if (player->dir == player->newdir)
         {
-            player->x = player->destX;
-            player->y = player->destY;
+            player->pos = player->dest;
             player_update_direction(board, player->dir, player);
         }
         
         player->dir = player->newdir;
-        player->destX = player->newdestX;
-        player->destY = player->newdestY;
+        player->dest = player->newdest;
     }
 
     // DEBUG
@@ -79,13 +73,13 @@ bool player_check_destination(player_t* player)
     switch(player->dir)
     {
         case UP:
-            return player->y > player->destY;
+            return player->pos->y > player->dest->y;
         case DOWN:
-            return player->y < player->destY;
+            return player->pos->y < player->dest->y;
         case LEFT:
-            return player->x > player->destX;
+            return player->pos->x > player->dest->x;
         case RIGHT:
-            return player->x < player->destX;
+            return player->pos->x < player->dest->x;
         default:
             break;
     }
@@ -96,8 +90,14 @@ bool player_check_destination(player_t* player)
 
 void player_update_direction(board_t* board, E_DIR dir, player_t* player)
 {
-    int x = (player->destX - OFFSET) / (int)UNIT_SIZE;
-    int y = (player->destY - OFFSET) / (int)UNIT_SIZE;
+    if (player->dest == NULL)
+        return;
+
+    vector2_t* vect = malloc(sizeof(vector2_t));
+    screen_to_board(vect, player->dest->x, player->dest->y);
+    int x = vect->x;
+    int y = vect->y;
+    free(vect);
 
     //printf("x = %i & y = %i\n", x, y);
 
@@ -106,9 +106,8 @@ void player_update_direction(board_t* board, E_DIR dir, player_t* player)
         case UP:
             if (y > 0 && !board->cells[x + (y - 1) * board->width].is_wall)
             {                         
-                player->newdir = UP;
-                player->newdestX = x * UNIT_SIZE + OFFSET;
-                player->newdestY = (y - 1) * UNIT_SIZE + OFFSET;
+                player->newdir = UP;      
+                board_to_screen(player->newdest, x, y - 1);
                 return;
             }
             break;
@@ -116,8 +115,7 @@ void player_update_direction(board_t* board, E_DIR dir, player_t* player)
             if (y < BOARD_HEIGHT - 1 && !board->cells[x + (y + 1) * board->width].is_wall)
             {
                 player->newdir = DOWN;
-                player->newdestX = x * UNIT_SIZE + OFFSET;
-                player->newdestY = (y + 1) * UNIT_SIZE + OFFSET;
+                board_to_screen(player->newdest, x, y + 1);
                 return;
             }
             break;
@@ -125,8 +123,7 @@ void player_update_direction(board_t* board, E_DIR dir, player_t* player)
             if (x > 0 && !board->cells[x - 1 + y * board->width].is_wall)
             {
                 player->newdir = LEFT;
-                player->newdestX = (x - 1) * UNIT_SIZE + OFFSET;
-                player->newdestY = y * UNIT_SIZE + OFFSET;
+                board_to_screen(player->newdest, x - 1, y);
                 return;
             }
             break;
@@ -134,8 +131,7 @@ void player_update_direction(board_t* board, E_DIR dir, player_t* player)
             if (x < BOARD_WIDTH - 1 && !board->cells[x + 1 + y * board->width].is_wall)
             {
                 player->newdir = RIGHT;
-                player->newdestX = (x + 1) * UNIT_SIZE + OFFSET;
-                player->newdestY = y * UNIT_SIZE + OFFSET;
+                board_to_screen(player->newdest, x + 1, y);
                 return;
             }
             break;
@@ -150,20 +146,20 @@ void player_update_position(player_t* player, float velocity)
     switch(player->dir)
     {
         case UP:
-            player->y -= velocity;
-            player->x = player->destX;
+            player->pos->y -= velocity;
+            player->pos->x = player->dest->x;
             break;
         case DOWN:
-            player->y += velocity;
-            player->x = player->destX;
+            player->pos->y += velocity;
+            player->pos->x = player->dest->y;
             break;
         case LEFT:
-            player->x -= velocity;
-            player->y = player->destY;
+            player->pos->x -= velocity;
+            player->pos->y = player->dest->y;
             break;
         case RIGHT:
-            player->x += velocity;
-            player->y = player->destY;
+            player->pos->x += velocity;
+            player->pos->y = player->dest->y;
             break;
         default:
             break;

@@ -35,5 +35,10 @@ typedef enum
     NONE
 }E_DIR;
 
+typedef struct vector2_s
+{
+    float x;
+    float y;
+} vector2_t;
 
 #endif

@@ -6,6 +6,7 @@
 #include "draw.h"
 #include "board.h"
 #include "enemy.h"
+#include "defs.h"
 
 typedef struct game_s
 {

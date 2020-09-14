@@ -3,6 +3,7 @@
 
 // #include "item.h"
 #include "sdl_utils.h"
+#include "defs.h"
 
 #include <stdbool.h>
 
@@ -33,13 +34,6 @@ typedef struct board_s
 }board_t; 
 
 
-typedef struct vector2int_s
-{
-    int x;
-    int y;
-} vector2int_t;
-
-
 cell_t* create_cell(game_t* game);
 board_t* create_board();
 
@@ -48,8 +42,8 @@ void init_board(board_t* board, game_t* game);
 
 void destroy_board(board_t* board);
 
-vector2int_t* board_to_screen(int x, int y);
-vector2int_t* screen_to_board(float x, float y);
+void board_to_screen(vector2_t* vect, int x, int y);
+void screen_to_board(vector2_t* vect, float x, float y);
 
 
 #endif

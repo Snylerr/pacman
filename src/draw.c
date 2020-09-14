@@ -45,6 +45,6 @@ void draw_board(game_t* game)
 void draw_player(game_t* game)
 {
 	SDL_SetRenderDrawColor(game->draw->renderer, 255, 255, 0, 255);
-	SDL_Rect rect = {game->player->x - unit_half, game->player->y - unit_half, UNIT_SIZE, UNIT_SIZE};
+	SDL_Rect rect = {game->player->pos->x - unit_half, game->player->pos->y - unit_half, UNIT_SIZE, UNIT_SIZE};
 	SDL_RenderDrawRect(game->draw->renderer, &rect);
 }
