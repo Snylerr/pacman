@@ -4,7 +4,7 @@ game_t* create_game()
 {
     game_t* game = malloc(sizeof(game_t));
     game->draw = create_draw();
-    game->board = create_board();
+    game->board = create_board(game);
     game->input = create_input();
     game->player = create_player();
 

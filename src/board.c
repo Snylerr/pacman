@@ -4,11 +4,11 @@
 
 #include <stdlib.h>
 
-board_t* create_board()
+board_t* create_board(game_t* game)
 {
 	board_t* board = malloc(sizeof(board_t));
 	
-	init_board(board);
+	init_board(board, game);
 	
 	return board;
 }
@@ -19,10 +19,12 @@ void destroy_board(board_t* board)
 	free(board);
 }
 
-void init_board(board_t* board)
+void init_board(board_t* board, game_t* game)
 {
 	board->width = BOARD_WIDTH;
 	board->height = BOARD_HEIGHT;
+	
+	board->tileset = SDL_CreateTexture(game->draw->renderer, );
 	
 	board->cells = malloc(board->width * board->height * sizeof(cell_t));
 	
