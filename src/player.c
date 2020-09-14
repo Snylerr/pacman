@@ -14,7 +14,7 @@ player_t* create_player(game_t* game)
     // PLAYER CREATION
     player_t* player = malloc(sizeof(player_t));
  	
-    player->x = board_to_screen(PLAYER_START_X);
+    player->x = board_to_screen(PLAYER_START_X) - UNIT_SIZE / 2;
     player->y = board_to_screen(PLAYER_START_Y);
     
     player->destX = player->x;
@@ -92,7 +92,7 @@ void player_process(game_t* game, float deltaTicks)
     }
     
     // DEBUG
-    printf("POSX = %f && DESTX = %i \n", (player->x), (player->destX));
+    //printf("POSX = %f && DESTX = %i \n", (player->x), (player->destX));
 }
 
 bool player_check_destination(player_t* player)

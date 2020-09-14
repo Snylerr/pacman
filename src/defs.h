@@ -14,8 +14,8 @@
 
 #define OFFSET 32
 
-#define PLAYER_START_X 15
-#define PLAYER_START_Y 14
+#define PLAYER_START_X 14
+#define PLAYER_START_Y 17
 #define PLAYER_SPEED 96
 
 
