@@ -1,6 +1,7 @@
 #include "board.h"
 #include "map.h"
 #include "defs.h"
+#include "game.h"
 
 #include <stdlib.h>
 
@@ -24,7 +25,11 @@ void init_board(board_t* board, game_t* game)
 	board->width = BOARD_WIDTH;
 	board->height = BOARD_HEIGHT;
 	
-	board->tileset = SDL_CreateTexture(game->draw->renderer, );
+	SDL_Surface* surface = IMG_Load("assets/pac man tiles/background2.png");
+	if (surface == NULL)
+		return;
+	
+	board->tileset = utils_load_texture(game->draw->renderer, surface);
 	
 	board->cells = malloc(board->width * board->height * sizeof(cell_t));
 	

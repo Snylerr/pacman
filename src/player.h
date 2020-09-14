@@ -16,6 +16,8 @@ typedef struct player_s
 {
 	tile_t* tile;
 	
+	SDL_Texture* sprite;
+	
     float x;
     float y;
 

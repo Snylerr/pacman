@@ -15,6 +15,7 @@ typedef struct cell_s
 	tile_t* tile;
 	
 	bool is_wall;
+	bool is_border;
 
     // ITEM INSIDE CELL
 	// E_ITEM item;
@@ -39,11 +40,11 @@ typedef struct vector2int_s
 } vector2int_t;
 
 
-cell_t* create_cell();
+cell_t* create_cell(game_t* game);
 board_t* create_board();
 
 void init_cell(cell_t* cell);
-void init_board(board_t* board);
+void init_board(board_t* board, game_t* game);
 
 void destroy_board(board_t* board);
 
