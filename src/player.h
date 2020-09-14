@@ -18,10 +18,13 @@ typedef struct player_s
 	
 	SDL_Texture* sprite;
 	
-    vector2_t* pos;
+    float x;
+    float y;
 
-    vector2_t* dest;
-    vector2_t* newdest;
+    int destX;
+    int destY;
+    int newdestX;
+    int newdestY;
     
     E_DIR dir;
     E_DIR newdir;

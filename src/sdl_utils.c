@@ -56,8 +56,8 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 	player_t* entity_ = (player_t*)entity;
 	tile_t* entity_tile = entity_->tile;
 	
-	int x = (int)entity_->pos->x;
-	int y = (int)entity_->pos->y;
+	int x = entity_->x;
+	int y = entity_->y;
 	
 	int dir = entity_->dir;
 	

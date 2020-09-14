@@ -36,18 +36,12 @@ void init_board(board_t* board, game_t* game)
 	read_map_file("include/board.map", board);
 }
 
-void screen_to_board(vector2_t* vect, float x, float y)
+int screen_to_board(int x)
 {
-    if (vect == NULL)
-        return;
-    vect->x = (float)((int)(x - OFFSET) / UNIT_SIZE);
-    vect->y = (float)((int)(y - OFFSET) / UNIT_SIZE);
+    return (x - OFFSET) / UNIT_SIZE;
 }
 
-void board_to_screen(vector2_t* vect, int x, int y)
+int board_to_screen(int x)
 {
-    if (vect == NULL)
-        return;  
-    vect->x = (float)(x * UNIT_SIZE + OFFSET);
-    vect->y = (float)(y * UNIT_SIZE + OFFSET);
+    return (x * UNIT_SIZE) + OFFSET;
 }

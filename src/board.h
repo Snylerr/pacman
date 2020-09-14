@@ -10,6 +10,7 @@
 
 typedef struct game_s game_t;
 
+// MAIN BOARD STRUCTS
 
 typedef struct cell_s
 {
@@ -33,6 +34,8 @@ typedef struct board_s
 	cell_t* cells;
 }board_t; 
 
+// ======================
+// CREATION & DESTRUCTION
 
 cell_t* create_cell(game_t* game);
 board_t* create_board();
@@ -42,8 +45,12 @@ void init_board(board_t* board, game_t* game);
 
 void destroy_board(board_t* board);
 
-void board_to_screen(vector2_t* vect, int x, int y);
-void screen_to_board(vector2_t* vect, float x, float y);
+
+// ======================
+// Coordinates converters
+
+int screen_to_board(int x);
+int board_to_screen(int x);
 
 
 #endif

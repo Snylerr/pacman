@@ -37,8 +37,8 @@ typedef enum
 
 typedef struct vector2_s
 {
-    float x;
-    float y;
+    int x;
+    int y;
 } vector2_t;
 
 #endif
