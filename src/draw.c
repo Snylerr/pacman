@@ -3,6 +3,7 @@
 #include "game.h"
 #include "string_length.h"
 #include "string_sized_concatenate.h"
+#include "string_duplicate.h"
 #include "int_to_alpha.h"
 
 #include <SDL2/SDL_ttf.h>
