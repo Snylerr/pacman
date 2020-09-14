@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <SDL2/SDL_ttf.h>
 
 
 #include "sdl_utils.h"
@@ -13,7 +12,7 @@
 
 void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer)
 {
-	if (TTF_Init() == -1)
+	if (TTF_Init() != 0)
 	{
 		printf("TTF_Init: %s\n", TTF_GetError());
 		return;

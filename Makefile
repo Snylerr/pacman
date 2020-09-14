@@ -2,7 +2,7 @@
 CFLAGS=-Wall -Wextra -g
 CPPFLAGS=-MMD -Iinclude
 LDFLAGS=
-LDLIBS= -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+LDLIBS= -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
 SRCS=$(wildcard src/*.c)
 FILES=$(subst src/,,$(SRCS))

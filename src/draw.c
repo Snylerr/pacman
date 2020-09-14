@@ -1,6 +1,9 @@
 #include "draw.h"
 #include "defs.h"
 #include "game.h"
+#include "string_length.h"
+#include "string_sized_concatenate.h"
+#include "int_to_alpha.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -23,14 +26,28 @@ draw_t* create_draw()
 
 void draw_debug(game_t* game)
 {
-	TTF_Font* font = TTF_OpenFont("include/Roboto-Black.ttf", 16);
+	TTF_Font* font = TTF_OpenFont("include/JetBrainsMono-Medium.ttf", 16);
 	SDL_Color White = {255, 255, 255, 255};
 	
-	SDL_Surface* surface = TTF_RenderText_Solid(font, "Debug mode is on", White);
+	char* temp = "Player speed: ";
+	
+	char* speed_txt = int_to_alpha(game->player->speed);
+	
+	int speed_txt_size = string_length(speed_txt);
+	
+	char* player_text = string_duplicate(temp);
+	
+	player_text = realloc(player_text, (string_length(temp) + speed_txt_size) * sizeof(char));
+	
+	string_sized_concatenate(player_text, speed_txt, speed_txt_size);
+	
+	int player_vel_size = string_length(player_text);
+	
+	SDL_Surface* surface = TTF_RenderText_Solid(font, player_text, White);
 	
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(game->draw->renderer, surface);
 	
-	SDL_Rect rect = {0, 0, 1024, 16};
+	SDL_Rect rect = {0, SCREEN_HEIGHT - 32, 16 * player_vel_size, 16};
 	
 	SDL_RenderCopy(game->draw->renderer, texture, NULL, &rect);
 	
