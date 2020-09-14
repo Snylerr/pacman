@@ -40,14 +40,14 @@ void screen_to_board(vector2_t* vect, float x, float y)
 {
     if (vect == NULL)
         return;
-    vect->x = (x - OFFSET) / UNIT_SIZE;
-    vect->y = (y - OFFSET) / UNIT_SIZE;
+    vect->x = (float)((int)(x - OFFSET) / UNIT_SIZE);
+    vect->y = (float)((int)(y - OFFSET) / UNIT_SIZE);
 }
 
 void board_to_screen(vector2_t* vect, int x, int y)
 {
     if (vect == NULL)
         return;  
-    vect->x = x * UNIT_SIZE + OFFSET;
-    vect->y = y * UNIT_SIZE + OFFSET;
+    vect->x = (float)(x * UNIT_SIZE + OFFSET);
+    vect->y = (float)(y * UNIT_SIZE + OFFSET);
 }
