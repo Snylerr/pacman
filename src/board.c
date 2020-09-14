@@ -28,3 +28,19 @@ void init_board(board_t* board)
 	
 	read_map_file("include/board.map", board);
 }
+
+vector2int_t* screen_to_board(float x, float y)
+{
+    vector2int_t* vect = malloc(sizeof(vector2int_t));
+    vect->x = (x - OFFSET) / UNIT_SIZE;
+    vect->y = (y - OFFSET) / UNIT_SIZE;
+    return vect;
+}
+
+vector2int_t* board_to_screen(int x, int y)
+{
+    vector2int_t* vect = malloc(sizeof(vector2int_t));
+    vect->x = x * UNIT_SIZE + OFFSET;
+    vect->y = y * UNIT_SIZE + OFFSET;
+    return vect;
+}

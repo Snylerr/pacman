@@ -9,6 +9,7 @@
 
 typedef struct game_s game_t;
 
+
 typedef struct cell_s
 {
 	tile_t tile;
@@ -20,6 +21,7 @@ typedef struct cell_s
 
 } cell_t;
 
+
 typedef struct board_s
 {
 	int width, height;
@@ -27,15 +29,24 @@ typedef struct board_s
 	cell_t* cells;
 }board_t; 
 
+
+typedef struct vector2int_s
+{
+    int x;
+    int y;
+} vector2int_t;
+
+
 cell_t* create_cell();
-
-void init_cell(cell_t* cell);
-
-void init_board(board_t* board);
-
 board_t* create_board();
 
+void init_cell(cell_t* cell);
+void init_board(board_t* board);
+
 void destroy_board(board_t* board);
+
+vector2int_t* board_to_screen(int x, int y);
+vector2int_t* screen_to_board(float x, float y);
 
 
 #endif
