@@ -30,14 +30,16 @@ player_t* create_player(game_t* game)
     // SPRITE CREATION
     // NEED TO BE PUT IN ANOTHER FUNCTION !!!
 
-	tile_t* tile = malloc(sizeof(tile_t));
+	tile_t tile = {};
 	
-	tile->width = 32;
-	tile->height = 32;
-	tile->row = 0;
-	tile->column = 0;
+	tile.width = 32;
+	tile.height = 32;
+	tile.row = 0;
+	tile.column = 0;
 	
 	player->tile = tile;
+	
+	player->score = 0;
 
 	SDL_Surface* surface = IMG_Load("assets/pac man & life counter & death/pac man/pac_man_0.png");
 	if (surface == NULL)
@@ -52,7 +54,7 @@ player_t* create_player(game_t* game)
 
 void destroy_player(player_t* player)
 {
-	free(player->tile);
+	SDL_DestroyTexture(player->sprite);
     free(player);
 }
 
@@ -77,11 +79,11 @@ void player_process(game_t* game, float deltaTicks)
     {
         player->x = player->destX;
         player->y = player->destY;
-    }        
-    
+    }
+    player_check_cell(game);
+	
     if (!player_check_destination(player))
     {
-        player_check_cell(game);
         if (player->dir == player->newdir)
             player_update_direction(board, player->dir, player);
         
@@ -104,31 +106,29 @@ void player_check_cell(game_t* game)
     int x = screen_to_board(player->x);
     int y = screen_to_board(player->y);
 
-    cell_t cell = board->cells[x + y * board->width];
-    printf("x = %i & y = %i\n", x, y);
-    if (cell.item == NULL)
-        return;
-    player_cell_process(player, &cell);
+    cell_t* cell = &board->cells[x + y * board->width];
+	
+    player_cell_process(player, cell);
 }
 
 void player_cell_process(player_t* player, cell_t* cell)
 {
-    item_t* item = cell->item;
+    item_t* item = &cell->item;
+	printf("player1 %i\n", item->item_type);
     switch(item->item_type)
     {
         case E_PILL:
             player->score += item->score;
             destroy_item(item);
-            cell->item = NULL;
             break;
         case E_BIG_PILL:
             player->score += item->score;
             destroy_item(item);
-            cell->item = NULL;
             break;
         default:
             break;
     }
+	printf("player2 %i\n", item->item_type);
 }
 
 

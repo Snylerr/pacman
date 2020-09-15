@@ -23,22 +23,22 @@ bool is_X(char c)
 	return false;
 }
 
-item_t* get_item_from_char(game_t* game, char c)
+item_t get_item_from_char(game_t* game, char c)
 {
-	item_t* item = malloc(sizeof(item_t));
+	item_t item = {};
 
 	switch(c)
 	{
 		case '1':
-			init_item(game, item, E_PILL, 100);
-			return item;
+			init_item(game, &item, E_PILL, 10);
+			break;
 		case '2':
-			init_item(game, item, E_BIG_PILL, 200);
-			return item;
+			init_item(game, &item, E_BIG_PILL, 50);
+			break;
 		default:
-			free(item);
-			return NULL;
+			init_item(game, &item, E_NONE, 0);
 	}
+	return item;
 }
 
 int	read_char(FILE* file, char* pointer_c)

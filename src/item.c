@@ -7,18 +7,19 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
     item->item_type = item_type;
     item->score = score;
 
-    item->tile = malloc(sizeof(tile_t));
+    tile_t tile = {};
 
+	item->tile = tile;
 
     SDL_Surface* surface;
 
     switch(item_type)
     {
         case E_PILL:
-            item->tile->row = 0;
-            item->tile->column = 0;
-            item->tile->width = 8;
-            item->tile->height = 8;
+            item->tile.row = 0;
+            item->tile.column = 0;
+            item->tile.width = 8;
+            item->tile.height = 8;
 
             surface = IMG_Load("assets/pac man pill/spr_pill_0.png");
             if (surface == NULL)
@@ -29,10 +30,10 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
             SDL_FreeSurface(surface);
             break;
         case E_BIG_PILL:
-            item->tile->row = 0;
-            item->tile->column = 0;
-            item->tile->width = 16;
-            item->tile->height = 16;
+            item->tile.row = 0;
+            item->tile.column = 0;
+            item->tile.width = 16;
+            item->tile.height = 16;
 
             surface = IMG_Load("assets/pac man pill/spr_power_pill_0.png");
             if (surface == NULL)
@@ -48,7 +49,11 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
 
 void destroy_item(item_t* item)
 {
-    free(item->tile);
+	
+	printf("destroy1 %i\n", item->item_type);
+	item->score = 0;
+	item->item_type = E_NONE;
+	
+	printf("destroy2 %i\n", item->item_type);
     SDL_DestroyTexture(item->sprite);
-    free(item);
 }

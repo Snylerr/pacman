@@ -15,13 +15,13 @@ typedef struct game_s game_t;
 
 typedef struct cell_s
 {
-	tile_t* tile;
+	tile_t tile;
 	
 	bool is_wall;
 	bool is_border;
 
     // ITEM INSIDE CELL
-	item_t* item;
+	item_t item;
 
 } cell_t;
 

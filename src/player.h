@@ -15,7 +15,7 @@ typedef struct input_s input_t;
 
 typedef struct player_s
 {
-	tile_t* tile;
+	tile_t tile;
 	
 	SDL_Texture* sprite;
 	

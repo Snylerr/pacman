@@ -53,9 +53,9 @@ void draw_debug(game_t* game)
 	TTF_Font* font = TTF_OpenFont("include/JetBrainsMono-Medium.ttf", 16);
 	SDL_Color White = {255, 255, 255, 255};
 	
-	char* temp = "Player speed: ";
+	char* temp = "Player score: ";
 	
-	char* speed_txt = int_to_alpha(game->player->speed);
+	char* speed_txt = int_to_alpha(game->player->score);
 	
 	int speed_txt_size = string_length(speed_txt);
 	
@@ -96,7 +96,7 @@ void draw_board(game_t* game)
 				SDL_Rect rect = {j * UNIT_SIZE + OFFSET - unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderFillRect(game->draw->renderer, &rect);
 			}
-			else if (board->cells[j + i * board->width].item != NULL)
+			else
 			{
 				utils_item_render_cpy(game, board->cells[j + i * board->width].item, board_to_screen(j), board_to_screen(i));
 			}

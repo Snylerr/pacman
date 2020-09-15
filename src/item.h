@@ -12,13 +12,14 @@ typedef enum
 {
 	E_PILL,
 	E_BIG_PILL,
+	E_NONE,
 	
 	E_COUNT
 }E_ITEM;
 
 typedef struct item_s
 {
-	tile_t* tile;
+	tile_t tile;
 	
 	SDL_Texture* sprite;
 
