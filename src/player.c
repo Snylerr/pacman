@@ -114,7 +114,7 @@ void player_check_cell(game_t* game)
 void player_cell_process(player_t* player, cell_t* cell)
 {
     item_t* item = &cell->item;
-	printf("player1 %i\n", item->item_type);
+
     switch(item->item_type)
     {
         case E_PILL:
@@ -128,7 +128,6 @@ void player_cell_process(player_t* player, cell_t* cell)
         default:
             break;
     }
-	printf("player2 %i\n", item->item_type);
 }
 
 

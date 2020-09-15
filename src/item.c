@@ -49,11 +49,8 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
 
 void destroy_item(item_t* item)
 {
-	
-	printf("destroy1 %i\n", item->item_type);
 	item->score = 0;
 	item->item_type = E_NONE;
 	
-	printf("destroy2 %i\n", item->item_type);
     SDL_DestroyTexture(item->sprite);
 }

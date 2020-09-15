@@ -64,10 +64,12 @@ void game_main_loop(game_t* game)
         if (game->input->escape)
         {
             game->input->escape = false;
-            while (!game->input->escape)
+            while (game->input->escape == false)
             {
+                input_process(game->input);
                 // PAUSE
             }
+            game->input->escape = false;
         }
 		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(game->draw->renderer);
