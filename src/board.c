@@ -33,7 +33,7 @@ void init_board(board_t* board, game_t* game)
 	
 	board->cells = malloc(board->width * board->height * sizeof(cell_t));
 	
-	read_map_file("include/board.map", board);
+	read_map_file("include/board.map", board, game);
 }
 
 int screen_to_board(int x)

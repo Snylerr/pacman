@@ -3,6 +3,7 @@
 
 #include "defs.h"
 #include "sdl_utils.h"
+#include "item.h"
 
 #include <stdbool.h>
 
@@ -31,6 +32,8 @@ typedef struct player_s
 
     float speed;
 
+    int score;
+
 } player_t;
 
 // CREATION & DESTRUCTION
@@ -46,7 +49,8 @@ void player_update_direction(board_t* board, E_DIR dir, player_t* player);
 void player_update_destination(player_t* player);
 void player_update_position(player_t* player, float velocity);
 
-
-
+// ITEM COLLISION & EFFECTS
+void player_cell_process(player_t* player, cell_t* cell);
+void player_check_cell(game_t* game);
 
 #endif

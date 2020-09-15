@@ -9,6 +9,7 @@
 #include "board.h"
 #include "defs.h"
 #include "draw.h"
+#include "item.h"
 
 void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer)
 {
@@ -47,7 +48,6 @@ SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface)
 {
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(
 							renderer, surface);
-
 	return texture;
 }
 
@@ -69,6 +69,19 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 	SDL_Rect dst_rect = {x - entity_tile->width/2, y - entity_tile->height/2, 32, 32};
 
 	SDL_RenderCopyEx(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect, angle, &center, SDL_FLIP_NONE);
+}
+
+void utils_item_render_cpy(game_t* game, item_t* item, int x, int y)
+{
+	if (item == NULL)
+		return;
+	tile_t* item_tile = item->tile;
+
+	SDL_Rect src_rect = {0, 0, item_tile->width, item_tile->height};
+	SDL_Rect dst_rect = {x - item_tile->width/2, y - item_tile->height/2, item_tile->width, item_tile->height};
+
+	SDL_RenderCopy(game->draw->renderer, item->sprite, &src_rect, &dst_rect);
+	printf("x: %i - y: %i\n", x, y);
 }
 
 void utils_cell_render_cpy(game_t* game, board_t* board, cell_t* cell, int x, int y)

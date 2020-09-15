@@ -1,6 +1,7 @@
 #include "draw.h"
 #include "defs.h"
 #include "game.h"
+#include "board.h"
 #include "string_length.h"
 #include "string_sized_concatenate.h"
 #include "string_duplicate.h"
@@ -25,8 +26,30 @@ draw_t* create_draw()
 	return draw;
 }
 
+void draw_debug_player(game_t* game)
+{
+	SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
+	SDL_Rect rect = {game->player->x - unit_half / 2, game->player->y - unit_half / 2, UNIT_SIZE / 2, UNIT_SIZE / 2};
+	SDL_RenderDrawRect(game->draw->renderer, &rect);
+
+	SDL_SetRenderDrawColor(game->draw->renderer, 0, 255, 0, 255);
+	SDL_Rect rect1 = {game->player->destX - unit_half / 1.6f, game->player->destY - unit_half / 1.6f, UNIT_SIZE / 1.6f, UNIT_SIZE / 1.6f};
+	SDL_RenderDrawRect(game->draw->renderer, &rect1);
+
+	SDL_SetRenderDrawColor(game->draw->renderer, 250, 80, 0, 255);
+	SDL_Rect rect2 = {game->player->destX - unit_half, game->player->destY - unit_half, UNIT_SIZE, UNIT_SIZE};
+	SDL_RenderDrawRect(game->draw->renderer, &rect2);
+}
+
 void draw_debug(game_t* game)
 {
+	// ============
+	// VISUAL DEBUG
+
+	draw_debug_player(game);
+
+	// =============
+	// TEXTUAL DEBUG
 	TTF_Font* font = TTF_OpenFont("include/JetBrainsMono-Medium.ttf", 16);
 	SDL_Color White = {255, 255, 255, 255};
 	
@@ -73,6 +96,10 @@ void draw_board(game_t* game)
 				SDL_Rect rect = {j * UNIT_SIZE + OFFSET - unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
 				SDL_RenderFillRect(game->draw->renderer, &rect);
 			}
+			else if (board->cells[j + i * board->width].item != NULL)
+			{
+				utils_item_render_cpy(game, board->cells[j + i * board->width].item, board_to_screen(j), board_to_screen(i));
+			}
 			
 			SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 			SDL_Rect rect_ = {j * UNIT_SIZE + OFFSET- unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
@@ -84,8 +111,5 @@ void draw_board(game_t* game)
 
 void draw_player(game_t* game)
 {
-	// SDL_SetRenderDrawColor(game->draw->renderer, 255, 255, 0, 255);
-	// SDL_Rect rect = {game->player->x - unit_half, game->player->y - unit_half, UNIT_SIZE, UNIT_SIZE};
-	// SDL_RenderDrawRect(game->draw->renderer, &rect);
 	utils_entity_render_cpy(game, game->player);
 }

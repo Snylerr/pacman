@@ -4,6 +4,7 @@
 // #include "item.h"
 #include "sdl_utils.h"
 #include "defs.h"
+#include "item.h"
 
 #include <stdbool.h>
 
@@ -20,7 +21,7 @@ typedef struct cell_s
 	bool is_border;
 
     // ITEM INSIDE CELL
-	// E_ITEM item;
+	item_t* item;
 
 } cell_t;
 

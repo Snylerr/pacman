@@ -6,6 +6,8 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_ttf.h>
 
+typedef struct item_s item_t;
+
 typedef struct board_s board_t;
 
 typedef struct cell_s cell_t;
@@ -23,6 +25,8 @@ void utils_init_window_and_renderer(SDL_Window** window, SDL_Renderer** renderer
 SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface);
 
 void utils_entity_render_cpy(game_t* game, void* entity);
+
+void utils_item_render_cpy(game_t* game, item_t* item, int x, int y);
 
 void utils_cell_render_cpy(game_t* game, board_t* board, cell_t* cell, int x, int y);
 

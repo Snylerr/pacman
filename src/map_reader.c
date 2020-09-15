@@ -4,7 +4,8 @@
 #include "board.h"
 #include "defs.h"
 #include "string_length.h"
-
+#include "item.h"
+#include "game.h"
 
 bool is_hashtag(char c)
 {
@@ -20,6 +21,24 @@ bool is_X(char c)
 		return true;
 
 	return false;
+}
+
+item_t* get_item_from_char(game_t* game, char c)
+{
+	item_t* item = malloc(sizeof(item_t));
+
+	switch(c)
+	{
+		case '1':
+			init_item(game, item, E_PILL, 100);
+			return item;
+		case '2':
+			init_item(game, item, E_BIG_PILL, 200);
+			return item;
+		default:
+			free(item);
+			return NULL;
+	}
 }
 
 int	read_char(FILE* file, char* pointer_c)
@@ -69,7 +88,7 @@ char* read_line(FILE* file)
 	return string_cpy;
 }
 
-void read_map_file(char const* file_path, board_t* board)
+void read_map_file(char const* file_path, board_t* board, game_t* game)
 {
 	FILE* file = fopen(file_path, "rb");
 
@@ -86,6 +105,8 @@ void read_map_file(char const* file_path, board_t* board)
 			cell.is_border = is_X(c);
 			if (cell.is_border)
 				cell.is_wall = true;
+			
+			cell.item = get_item_from_char(game, c);
 
 			board->cells[j + i * board->width] = cell;
 		}

@@ -81,7 +81,7 @@ void player_process(game_t* game, float deltaTicks)
     
     if (!player_check_destination(player))
     {
-        
+        player_check_cell(game);
         if (player->dir == player->newdir)
             player_update_direction(board, player->dir, player);
         
@@ -94,6 +94,43 @@ void player_process(game_t* game, float deltaTicks)
     // DEBUG
     //printf("POSX = %f && DESTX = %i \n", (player->x), (player->destX));
 }
+
+
+void player_check_cell(game_t* game)
+{
+    board_t* board = game->board;
+    player_t* player = game->player;
+
+    int x = screen_to_board(player->x);
+    int y = screen_to_board(player->y);
+
+    cell_t cell = board->cells[x + y * board->width];
+    printf("x = %i & y = %i\n", x, y);
+    if (cell.item == NULL)
+        return;
+    player_cell_process(player, &cell);
+}
+
+void player_cell_process(player_t* player, cell_t* cell)
+{
+    item_t* item = cell->item;
+    switch(item->item_type)
+    {
+        case E_PILL:
+            player->score += item->score;
+            destroy_item(item);
+            cell->item = NULL;
+            break;
+        case E_BIG_PILL:
+            player->score += item->score;
+            destroy_item(item);
+            cell->item = NULL;
+            break;
+        default:
+            break;
+    }
+}
+
 
 bool player_check_destination(player_t* player)
 {
