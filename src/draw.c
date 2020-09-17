@@ -50,7 +50,7 @@ void draw_debug(game_t* game)
 
 	// =============
 	// TEXTUAL DEBUG
-	TTF_Font* font = TTF_OpenFont("include/JetBrainsMono-Medium.ttf", 16);
+	TTF_Font* font = TTF_OpenFont("assets/fonts/JetBrainsMono-Medium.ttf", 16);
 	SDL_Color White = {255, 255, 255, 255};
 	
 	char* temp = "Player score: ";
@@ -89,12 +89,13 @@ void draw_board(game_t* game)
 		{
 			if(board->cells[j + i * board->width].is_wall)
 			{
-				if (board->cells[j + i * board->width].is_border)
+				/*if (board->cells[j + i * board->width].is_border)
 					SDL_SetRenderDrawColor(game->draw->renderer, 0, 255, 0, 255);
 				else if (board->cells[j + i * board->width].is_wall)
 					SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
 				SDL_Rect rect = {j * UNIT_SIZE + OFFSET - unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
-				SDL_RenderFillRect(game->draw->renderer, &rect);
+				SDL_RenderFillRect(game->draw->renderer, &rect);*/
+				utils_cell_render_cpy(game, board, board->cells[j + i * board->width], board_to_screen(j), board_to_screen(i));
 			}
 			else
 			{

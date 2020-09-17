@@ -81,9 +81,9 @@ void utils_item_render_cpy(game_t* game, item_t item, int x, int y)
 	SDL_RenderCopy(game->draw->renderer, item.sprite, &src_rect, &dst_rect);
 }
 
-void utils_cell_render_cpy(game_t* game, board_t* board, cell_t* cell, int x, int y)
+void utils_cell_render_cpy(game_t* game, board_t* board, cell_t cell, int x, int y)
 {
-	tile_t cell_tile = cell->tile;
+	tile_t cell_tile = cell.tile;
 
 	SDL_Rect src_rect = {cell_tile.column * cell_tile.width, cell_tile.row * cell_tile.height, cell_tile.width, cell_tile.height};
 	SDL_Rect dst_rect = {x, y, UNIT_SIZE, UNIT_SIZE};

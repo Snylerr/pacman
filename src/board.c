@@ -24,16 +24,18 @@ void init_board(board_t* board, game_t* game)
 {
 	board->width = BOARD_WIDTH;
 	board->height = BOARD_HEIGHT;
-	
+
 	SDL_Surface* surface = IMG_Load("assets/pac man tiles/background2.png");
 	if (surface == NULL)
 		return;
-	
+
 	board->tileset = utils_load_texture(game->draw->renderer, surface);
 	
 	board->cells = malloc(board->width * board->height * sizeof(cell_t));
 	
-	read_map_file("include/board.map", board, game);
+	read_map_file("map/board.map", board, game);
+
+	set_tile_cell_sprite(board);
 }
 
 int screen_to_board(int x)
