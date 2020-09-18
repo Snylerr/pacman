@@ -15,11 +15,10 @@ unsigned int matrix_filter(board_t* board, int x, int y)
             {
                 res += 1;
             }
-            res <<= 1;
+            
             printf("res: %i\n", res);
         }
     }
-    res >>= 1;
     return res;
 }
 
@@ -27,17 +26,15 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
 {
     int r = matrix_filter(board, x, y);
     printf("r: %i\n", r);
-
     switch(r)
     {
-        
         case 31:
             return E_D;
         case 159:
             return E_D;
         case 63:
             return E_D;
-        
+
         case 248:
             return E_L;
         case 252:
@@ -51,7 +48,7 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
             return E_U;
         case 246:
             return E_U;
-        
+
         case 107:
             return E_R;
         case 111:
@@ -62,9 +59,6 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
         default:
             return E_DEFAULT;
 
-
-
-    
     }
 }
 
@@ -79,10 +73,9 @@ void set_tile_cell_sprite(board_t* board)
             tile.height = UNIT_SIZE;
             E_CELL_SPRITE index = get_cell_sprite(board, i, j);
             printf("index: %d\n", index);
-            tile.row = index / 10;
-            tile.column = index % 10;
+            tile.row = index % 10;
+            tile.column = index / 10;
             board->cells[i + j * board->width].tile = tile;
         }
     }
 }
-
