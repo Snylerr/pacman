@@ -43,19 +43,15 @@ void draw_debug_player(game_t* game)
 
 void draw_debug(game_t* game)
 {
-	// ============
-	// VISUAL DEBUG
-
 	draw_debug_player(game);
 
-	// =============
-	// TEXTUAL DEBUG
-	TTF_Font* font = TTF_OpenFont("assets/fonts/JetBrainsMono-Medium.ttf", 16);
+    TTF_Font* font = TTF_OpenFont("assets/fonts/JetBrainsMono-Medium.ttf", 16);
 	SDL_Color White = {255, 255, 255, 255};
-	
-	char* temp = "Player score: ";
+
+    char* temp = "Player score: ";
 	
 	char* speed_txt = int_to_alpha(game->player->score);
+
 	
 	int speed_txt_size = string_length(speed_txt);
 	
@@ -72,9 +68,6 @@ void draw_debug(game_t* game)
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(game->draw->renderer, surface);
 	
 	SDL_Rect rect = {0, SCREEN_HEIGHT - 32, 16 * player_vel_size, 16};
-	
-	SDL_RenderCopy(game->draw->renderer, texture, NULL, &rect);
-	
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
 }
@@ -101,11 +94,11 @@ void draw_board(game_t* game)
 			{
 				utils_item_render_cpy(game, board->cells[j + i * board->width].item, board_to_screen(j), board_to_screen(i));
 			}
-			
+			/*
 			SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 			SDL_Rect rect_ = {j * UNIT_SIZE + OFFSET- unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
 			SDL_RenderDrawRect(game->draw->renderer, &rect_);
-			
+			*/
 		}
 	}
 }

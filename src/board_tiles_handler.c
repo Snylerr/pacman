@@ -20,6 +20,7 @@ unsigned int matrix_filter(board_t* board, int x, int y)
     }
     res >>= 1;
     printf("res: %i\n", res);
+
     return res;
 }
 
@@ -27,23 +28,35 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
 {
     int r = matrix_filter(board, x, y);
     printf("r: %i\n", r);
-
     switch(r)
     {
-        
         case 31:
             return E_D;
         case 159:
             return E_D;
         case 63:
             return E_D;
-        
+
         case 248:
-            return E_U;
+            return E_L;
         case 252:
-            return E_U;
+            return E_L;
         case 249:
+            return E_L;
+
+        case 214:
             return E_U;
+        case 215:
+            return E_U;
+        case 246:
+            return E_U;
+
+        case 107:
+            return E_R;
+        case 111:
+            return E_R;
+        case 235:
+            return E_R;
 
         case 214:
             return E_L;
@@ -80,9 +93,6 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
         default:
             return E_DEFAULT;
 
-
-
-    
     }
 }
 
@@ -103,4 +113,3 @@ void set_tile_cell_sprite(board_t* board)
         }
     }
 }
-
