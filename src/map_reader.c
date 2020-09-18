@@ -15,14 +15,6 @@ bool is_hashtag(char c)
 	return false;
 }
 
-bool is_X(char c)
-{
-	if (c == 'X')
-		return true;
-
-	return false;
-}
-
 item_t get_item_from_char(game_t* game, char c)
 {
 	item_t item = {};
@@ -104,10 +96,6 @@ void read_map_file(char const* file_path, board_t* board, game_t* game)
 			char c = line[j];
 			cell_t cell;
 			cell.is_wall = is_hashtag(c);
-
-			cell.is_border = is_X(c);
-			if (cell.is_border)
-				cell.is_wall = true;
 			
 			cell.item = get_item_from_char(game, c);
 

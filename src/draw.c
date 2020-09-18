@@ -82,23 +82,12 @@ void draw_board(game_t* game)
 		{
 			if(board->cells[j + i * board->width].is_wall)
 			{
-				/*if (board->cells[j + i * board->width].is_border)
-					SDL_SetRenderDrawColor(game->draw->renderer, 0, 255, 0, 255);
-				else if (board->cells[j + i * board->width].is_wall)
-					SDL_SetRenderDrawColor(game->draw->renderer, 255, 0, 0, 255);
-				SDL_Rect rect = {j * UNIT_SIZE + OFFSET - unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
-				SDL_RenderFillRect(game->draw->renderer, &rect);*/
 				utils_cell_render_cpy(game, board, board->cells[j + i * board->width], board_to_screen(j), board_to_screen(i));
 			}
 			else
 			{
 				utils_item_render_cpy(game, board->cells[j + i * board->width].item, board_to_screen(j), board_to_screen(i));
 			}
-			/*
-			SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
-			SDL_Rect rect_ = {j * UNIT_SIZE + OFFSET- unit_half, i * UNIT_SIZE + OFFSET- unit_half, UNIT_SIZE, UNIT_SIZE};
-			SDL_RenderDrawRect(game->draw->renderer, &rect_);
-			*/
 		}
 	}
 }

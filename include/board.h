@@ -38,7 +38,6 @@ typedef struct cell_s
 	E_CELL_SPRITE index;
 	
 	bool is_wall;
-	bool is_border;
 
     // ITEM INSIDE CELL
 	item_t item;
