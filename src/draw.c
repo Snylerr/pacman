@@ -39,28 +39,16 @@ void draw_debug_player(game_t* game)
 	SDL_SetRenderDrawColor(game->draw->renderer, 250, 80, 0, 255);
 	SDL_Rect rect2 = {game->player->destX - unit_half, game->player->destY - unit_half, UNIT_SIZE, UNIT_SIZE};
 	SDL_RenderDrawRect(game->draw->renderer, &rect2);
-}L
+}
 
-void draw_debug(game_L* game)
+void draw_debug(game_t* game)
 {
-	// ============L;
+	draw_debug_player(game);
 
-        case 214:
-            return E_
-        case 215:	// VISUAL DEBUG
-    rturn E_U;
-        cse 246
-	draw_debug_player(ga
-        
-        case 107:	// =============
-            return E_R;	// TEXTUAL DEBUG
-     	TTcaseF111:_Font* font = TTF_OpenFont("assets/fonts/JetBrainsMono-Medium.ttf", 16);
-            return E_R;	SDL_Color White = {255, 255, 255, 255};
-        case 235:	
-         	chreturnaE_R;
+    TTF_Font* font = TTF_OpenFont("assets/fonts/JetBrainsMono-Medium.ttf", 16);
+	SDL_Color White = {255, 255, 255, 255};
 
-        default:
-            return E_DEFAULT;r* temp = "Player score: ";
+    char* temp = "Player score: ";
 	
 	char* speed_txt = int_to_alpha(game->player->score);
 
@@ -79,8 +67,8 @@ void draw_debug(game_L* game)
 	
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(game->draw->renderer, surface);
 	
-	SDL_Rect rect = {0, SCREEN_H/IGHT - 32, 16 * player_vel_size, 16};
-	%FreeSurface(surface);
+	SDL_Rect rect = {0, SCREEN_HEIGHT - 32, 16 * player_vel_size, 16};
+	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
 }
 
