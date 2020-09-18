@@ -73,6 +73,8 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 
 void utils_item_render_cpy(game_t* game, item_t item, int x, int y)
 {
+	if (item.item_type == E_WARP)
+		return;
 	tile_t item_tile = item.tile;
 
 	SDL_Rect src_rect = {0, 0, item_tile.width, item_tile.height};
@@ -83,10 +85,13 @@ void utils_item_render_cpy(game_t* game, item_t item, int x, int y)
 
 void utils_cell_render_cpy(game_t* game, board_t* board, cell_t cell, int x, int y)
 {
+
+	if (cell.index == E_DEFAULT)
+		return;
 	tile_t cell_tile = cell.tile;
 
 	SDL_Rect src_rect = {cell_tile.column * cell_tile.width, cell_tile.row * cell_tile.height, cell_tile.width, cell_tile.height};
-	SDL_Rect dst_rect = {x, y, UNIT_SIZE, UNIT_SIZE};
+	SDL_Rect dst_rect = {x - cell_tile.width/2, y - cell_tile.height/2, UNIT_SIZE, UNIT_SIZE};
 
 	SDL_RenderCopy(game->draw->renderer, board->tileset, &src_rect, &dst_rect);
 }

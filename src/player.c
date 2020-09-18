@@ -40,6 +40,7 @@ player_t* create_player(game_t* game)
 	player->tile = tile;
 	
 	player->score = 0;
+    player->warp = false;
 
 	SDL_Surface* surface = IMG_Load("assets/pac man & life counter & death/pac man/pac_man_0.png");
 	if (surface == NULL)
@@ -115,6 +116,11 @@ void player_cell_process(player_t* player, cell_t* cell)
 {
     item_t* item = &cell->item;
 
+    //if (item->item_type == E_WARP)
+        //printf("%i\n", item->item_type == E_WARP);
+
+    //printf("%i\n", screen_to_board(player->x));
+
     switch(item->item_type)
     {
         case E_PILL:
@@ -125,7 +131,24 @@ void player_cell_process(player_t* player, cell_t* cell)
             player->score += item->score;
             destroy_item(item);
             break;
+        case E_WARP:
+            if (!player->warp)
+            {
+                player->warp = true;
+                if (screen_to_board(player->x) < 1)
+                {
+                    player->x = board_to_screen(BOARD_WIDTH);
+                    player->destX = player->x;
+                }
+                else
+                {
+                    player->x = board_to_screen(0);
+                    player->destX = player->x;
+                }
+            }
+            break;
         default:
+            player->warp = false;
             break;
     }
 }

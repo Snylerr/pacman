@@ -30,6 +30,8 @@ typedef struct player_s
     E_DIR dir;
     E_DIR newdir;
 
+    bool warp;
+
     float speed;
 
     int score;

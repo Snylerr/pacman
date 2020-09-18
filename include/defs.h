@@ -8,14 +8,14 @@
 #define SCREEN_HEIGHT 600
 
 #define BOARD_WIDTH 32
-#define BOARD_HEIGHT 33
+#define BOARD_HEIGHT 35
 
 #define UNIT_SIZE 16
 
 #define OFFSET 32
 
 #define PLAYER_START_X 16
-#define PLAYER_START_Y 18
+#define PLAYER_START_Y 19
 #define PLAYER_SPEED 96
 
 

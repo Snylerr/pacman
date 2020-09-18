@@ -12,6 +12,7 @@ typedef enum
 {
 	E_PILL,
 	E_BIG_PILL,
+	E_WARP,
 	E_NONE,
 	
 	E_COUNT
