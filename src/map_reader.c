@@ -35,6 +35,9 @@ item_t get_item_from_char(game_t* game, char c)
 		case '2':
 			init_item(game, &item, E_BIG_PILL, 50);
 			break;
+		case 'W':
+			init_item(game, &item, E_WARP, 0);
+			break;
 		default:
 			init_item(game, &item, E_NONE, 0);
 	}

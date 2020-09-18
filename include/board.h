@@ -16,24 +16,26 @@ typedef struct game_s game_t;
 typedef enum E_CELL_SPRITE
 {
 	E_U_L = 8,
-	E_U_R = 7,
-	E_D_L = 6,
-	E_D_R = 5,
+	E_U_R = 9,
+	E_D_L = 10,
+	E_D_R = 11,
 	E_U = 1,
-	E_D = 2,
-	E_L = 3,
-	E_R = 4,
-	E_C_U_L = 9,
-	E_C_U_R = 10,
-	E_C_D_L = 11,
-	E_C_D_R = 12,
+	E_D = 0,
+	E_L = 2,
+	E_R = 3,
+	E_C_U_L = 7,
+	E_C_U_R = 6,
+	E_C_D_L = 5,
+	E_C_D_R = 4,
 
-	E_DEFAULT
+	E_DEFAULT = 250
 } E_CELL_SPRITE;
 
 typedef struct cell_s
 {
 	tile_t tile;
+
+	E_CELL_SPRITE index;
 	
 	bool is_wall;
 	bool is_border;
