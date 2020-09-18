@@ -17,9 +17,9 @@ unsigned int matrix_filter(board_t* board, int x, int y)
             }
             res <<= 1;
             printf("res: %i\n", res);
-            
         }
     }
+    res >>= 1;
     return res;
 }
 
@@ -27,26 +27,30 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
 {
     int r = matrix_filter(board, x, y);
     printf("r: %i\n", r);
+
     switch(r)
     {
-        case 248:
-            return E_UP;
+        
         case 31:
-            return E_DOWN;
-        case 214:
-            return E_LEFT;
-        case 107:
-            return E_RIGHT;
-        case 208:
-            return E_UP_LEFT;
-        case 112:
-            return E_UP_RIGHT;
-        case 22:
-            return E_DOWN_LEFT;
-        case 11:
-            return E_DOWN_RIGHT;
+            return E_D;
+        case 159:
+            return E_D;
+        case 63:
+            return E_D;
+        
+        case 248:
+            return E_U;
+        case 252:
+            return E_U;
+        case 249:
+            return E_U;
+
         default:
             return E_DEFAULT;
+
+
+
+    
     }
 }
 

@@ -15,14 +15,18 @@ typedef struct game_s game_t;
 
 typedef enum E_CELL_SPRITE
 {
-	E_DOWN_RIGHT = 0,
-	E_DOWN_LEFT = 1,
-	E_DOWN = 3,
-	E_RIGHT = 10,
-	E_LEFT = 11,
-	E_UP_RIGHT = 12,
-	E_UP = 13,
-	E_UP_LEFT = 17,
+	E_U_L = 71,
+	E_U_R = 72,
+	E_D_L = 81,
+	E_D_R = 82,
+	E_U = 30,
+	E_D = 57,
+	E_L = 27,
+	E_R = 60,
+	C_U_L = 84,
+	C_U_R = 83,
+	C_D_L = 74,
+	C_D_R = 73,
 
 	E_DEFAULT
 } E_CELL_SPRITE;
