@@ -45,6 +45,21 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
         case 249:
             return E_U;
 
+        case 214:
+            return E_L;
+        case 215:
+            return E_L;
+        case 246:
+            return E_L;
+
+        case 107:
+            return E_R;
+        case 111:
+            return E_R;
+        case 235:
+            return E_R;
+
+
         default:
             return E_DEFAULT;
 
