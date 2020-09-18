@@ -39,11 +39,25 @@ E_CELL_SPRITE get_cell_sprite(board_t* board, int x, int y)
             return E_D;
         
         case 248:
-            return E_U;
+            return E_L;
         case 252:
-            return E_U;
+            return E_L;
         case 249:
+            return E_L;
+
+        case 214:
             return E_U;
+        case 215:
+            return E_U;
+        case 246:
+            return E_U;
+        
+        case 107:
+            return E_R;
+        case 111:
+            return E_R;
+        case 235:
+            return E_R;
 
         default:
             return E_DEFAULT;
@@ -65,8 +79,8 @@ void set_tile_cell_sprite(board_t* board)
             tile.height = UNIT_SIZE;
             E_CELL_SPRITE index = get_cell_sprite(board, i, j);
             printf("index: %d\n", index);
-            tile.row = index % 10;
-            tile.column = index / 10;
+            tile.row = index / 10;
+            tile.column = index % 10;
             board->cells[i + j * board->width].tile = tile;
         }
     }
