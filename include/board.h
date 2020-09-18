@@ -15,18 +15,18 @@ typedef struct game_s game_t;
 
 typedef enum E_CELL_SPRITE
 {
-	E_U_L = 71,
-	E_U_R = 72,
-	E_D_L = 81,
-	E_D_R = 82,
-	E_U = 30,
-	E_D = 57,
-	E_L = 27,
-	E_R = 60,
-	C_U_L = 84,
-	C_U_R = 83,
-	C_D_L = 74,
-	C_D_R = 73,
+	E_U_L = 8,
+	E_U_R = 7,
+	E_D_L = 6,
+	E_D_R = 5,
+	E_U = 1,
+	E_D = 2,
+	E_L = 3,
+	E_R = 4,
+	E_C_U_L = 9,
+	E_C_U_R = 10,
+	E_C_D_L = 11,
+	E_C_D_R = 12,
 
 	E_DEFAULT
 } E_CELL_SPRITE;
