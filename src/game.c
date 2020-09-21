@@ -3,7 +3,8 @@
 game_t* create_game()
 {
     game_t* game = malloc(sizeof(game_t));
-    game->draw = create_draw();
+    
+    game->draw = create_draw(game);
     game->board = create_board(game);
     game->input = create_input();
     game->player = create_player(game);
@@ -13,6 +14,8 @@ game_t* create_game()
     game->current_score = 0;
     game->high_score = 0;
 	
+    
+
 	return game;
 }
 
@@ -74,7 +77,11 @@ void game_main_loop(game_t* game)
 		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(game->draw->renderer);
 		
-		draw_board(game);
+        Uint32 ticks = SDL_GetTicks();
+
+        Uint32 item_sprite_state = ticks / 200;
+
+		draw_board(game, item_sprite_state);
 		draw_player(game);
 		
 		if (game->input->debug)

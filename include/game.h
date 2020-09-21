@@ -12,6 +12,11 @@
 
 typedef struct game_s
 {
+    int screen_width;
+    int screen_height;
+    int mid_ref_width;
+    int mid_ref_height;
+
     draw_t* draw;
 
     board_t* board;

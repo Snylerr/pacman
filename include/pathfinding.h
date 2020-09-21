@@ -8,7 +8,7 @@ Index directions :
 3 = LEFT
 */
 
-
+/*
 typedef struct pathnode_s
 {
     int x;
@@ -23,3 +23,5 @@ typedef struct pathgraph_s
 {
     pathnode_t pathnodes[];
 } pathgraph_t;
+
+*/

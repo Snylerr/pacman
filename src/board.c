@@ -1,6 +1,5 @@
 #include "board.h"
 #include "map.h"
-#include "defs.h"
 #include "game.h"
 
 #include <stdlib.h>
@@ -40,10 +39,10 @@ void init_board(board_t* board, game_t* game)
 
 int screen_to_board(int x)
 {
-    return (x - OFFSET) / UNIT_SIZE;
+    return x / UNIT_SIZE;
 }
 
 int board_to_screen(int x)
 {
-    return (x * UNIT_SIZE) + OFFSET;
+    return x * UNIT_SIZE;
 }

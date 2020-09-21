@@ -11,12 +11,13 @@
 
 const int unit_half = UNIT_SIZE / 2;
 
-draw_t* create_draw()
+
+draw_t* create_draw(game_t* game)
 {
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	
-	utils_init_window_and_renderer(&window, &renderer);
+	utils_init_window_and_renderer(game, &window, &renderer);
 	
 	draw_t* draw = malloc(sizeof(draw_t));
 	
@@ -72,7 +73,7 @@ void draw_debug(game_t* game)
 	SDL_DestroyTexture(texture);
 }
 
-void draw_board(game_t* game)
+void draw_board(game_t* game, Uint32 item_sprite_state)
 {
 	board_t* board = game->board;
 	
@@ -82,11 +83,15 @@ void draw_board(game_t* game)
 		{
 			if(board->cells[j + i * board->width].is_wall)
 			{
-				utils_cell_render_cpy(game, board, board->cells[j + i * board->width], board_to_screen(j), board_to_screen(i));
+				utils_cell_render_cpy(game, board, board->cells[j + i * board->width],
+										board_to_screen(j),
+										board_to_screen(i));
 			}
 			else
 			{
-				utils_item_render_cpy(game, board->cells[j + i * board->width].item, board_to_screen(j), board_to_screen(i));
+				utils_item_render_cpy(game, board->cells[j + i * board->width].item,
+										board_to_screen(j),
+										board_to_screen(i), item_sprite_state);
 			}
 		}
 	}
