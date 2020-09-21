@@ -28,7 +28,7 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
         printf("Error initializing SDL video:  %s\n", SDL_GetError());
         return;
     }
-
+	/*
     SDL_DisplayMode dm;
 
 	if (SDL_GetCurrentDisplayMode(0, &dm) != 0)
@@ -36,11 +36,11 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
 	     SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
 	     return;
 	}
-
-	game->screen_width = dm.w;
-	game->screen_height = dm.h;
-	game->mid_ref_width = (dm.w / 2 - BOARD_WIDTH * UNIT_SIZE * 1.5f) + OFFSET;
-	game->mid_ref_height = (dm.h / 2 - BOARD_HEIGHT * UNIT_SIZE) + OFFSET;
+	*/
+	game->screen_width = 1920; //dm.w;
+	game->screen_height = 1080; // dm.h;
+	game->mid_ref_width =  0; //(dm.w / 2 - BOARD_WIDTH * UNIT_SIZE * 1.5f) + OFFSET;
+	game->mid_ref_height = 0; //(dm.h / 2 - BOARD_HEIGHT * UNIT_SIZE) + OFFSET;
 
 
 	*window = SDL_CreateWindow("pacman",
@@ -85,7 +85,7 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 	SDL_Point center = {entity_tile.width / 2, entity_tile.height / 2};
 
 	SDL_Rect src_rect = {0, 0, entity_tile.width, entity_tile.height};
-	SDL_Rect dst_rect = {x - entity_tile.width/2 + game->mid_ref_width, y - entity_tile.height/2 + game->mid_ref_height, 32, 32};
+	SDL_Rect dst_rect = {x - entity_tile.width/2 + game->mid_ref_width, y - entity_tile.height/2 + game->mid_ref_height, entity_tile.width, entity_tile.height};
 
 	SDL_RenderCopyEx(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect, angle, &center, SDL_FLIP_NONE);
 }

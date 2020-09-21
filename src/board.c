@@ -24,7 +24,7 @@ void init_board(board_t* board, game_t* game)
 	board->width = BOARD_WIDTH;
 	board->height = BOARD_HEIGHT;
 
-	SDL_Surface* surface = IMG_Load("assets/pac man tiles/background.png");
+	SDL_Surface* surface = IMG_Load("assets/pac man tiles/background_hd.png");
 	if (surface == NULL)
 		return;
 

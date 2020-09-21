@@ -32,8 +32,8 @@ player_t* create_player(game_t* game)
 
 	tile_t tile = {};
 	
-	tile.width = 32;
-	tile.height = 32;
+	tile.width = UNIT_SIZE * 2;
+	tile.height = UNIT_SIZE * 2;
 	tile.row = 0;
 	tile.column = 0;
 	
@@ -42,7 +42,7 @@ player_t* create_player(game_t* game)
 	player->score = 0;
     player->warp = false;
 
-	SDL_Surface* surface = IMG_Load("assets/pac man & life counter & death/pac man/pac_man_0.png");
+	SDL_Surface* surface = IMG_Load("assets/pac man & life counter & death/pac man/pac_man_sheet.png");
 	if (surface == NULL)
 		return NULL;
 	

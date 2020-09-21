@@ -11,7 +11,7 @@
 #define BOARD_WIDTH 32
 #define BOARD_HEIGHT 35
 
-#define UNIT_SIZE 16
+#define UNIT_SIZE 32
 
 #define OFFSET 32
 
@@ -19,11 +19,7 @@
 #define PLAYER_START_Y 19
 #define PLAYER_SPEED 96
 
-
 #define MAX_ENEMIES 4
-
-// const int width = BOARD_WIDTH * UNIT_SIZE;
-// const int height = BOARD_HEIGHT * UNIT_SIZE;
 
 
 typedef enum

@@ -46,7 +46,7 @@ void game_main_loop(game_t* game)
     float delta = 0.f;
 
 
-	SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(game->draw->renderer, 38, 43, 68, 255);
 
     bool running = true;
     
@@ -74,7 +74,8 @@ void game_main_loop(game_t* game)
             }
             game->input->escape = false;
         }
-		SDL_SetRenderDrawColor(game->draw->renderer, 0, 0, 0, 255);
+
+		SDL_SetRenderDrawColor(game->draw->renderer, 38, 43, 68, 255);
 		SDL_RenderClear(game->draw->renderer);
 		
         Uint32 ticks = SDL_GetTicks();

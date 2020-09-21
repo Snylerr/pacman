@@ -18,8 +18,8 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
         case E_PILL:
             item->tile.row = 0;
             item->tile.column = 0;
-            item->tile.width = 8;
-            item->tile.height = 8;
+            item->tile.width = UNIT_SIZE;
+            item->tile.height = UNIT_SIZE;
 
             surface = IMG_Load("assets/pac man pill/power_pill_animated_HD.png");
             if (surface == NULL)
@@ -32,8 +32,8 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
         case E_BIG_PILL:
             item->tile.row = 0;
             item->tile.column = 0;
-            item->tile.width = 16;
-            item->tile.height = 16;
+            item->tile.width = UNIT_SIZE;
+            item->tile.height = UNIT_SIZE;
 
             surface = IMG_Load("assets/pac man pill/power_pill_animated_overkill.png");
             if (surface == NULL)
