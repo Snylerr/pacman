@@ -100,7 +100,7 @@ void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_
 	switch(item.item_type)
 	{
 		case E_PILL:
-			sprite_nb = 3;
+			sprite_nb = 6;
 			break;
 		case E_BIG_PILL:
 			sprite_nb = 4;
