@@ -66,8 +66,13 @@ void player_process(game_t* game, float deltaTicks)
     input_t* input = game->input;
     player_t* player = game->player; 
 
+    
+    
+
     // Puts input direction into newdir and newdest
     player_update_direction(board, input->dir, player);            
+
+    
 
     // if we can move forward
     if (player_check_destination(player))
@@ -78,21 +83,24 @@ void player_process(game_t* game, float deltaTicks)
     }
     else
     {
+        player_check_cell(game);
+        
         player->x = player->destX;
-        player->y = player->destY;
-    }
-    player_check_cell(game);
+        player->y = player->destY;     
+    }  
 	
     if (!player_check_destination(player))
     {
+        player_check_cell(game);
+
         if (player->dir == player->newdir)
             player_update_direction(board, player->dir, player);
         
         player->dir = player->newdir;
         player->destX = player->newdestX;
         player->destY = player->newdestY;
-
     }
+    
     
     // DEBUG
     //printf("POSX = %f && DESTX = %i \n", (player->x), (player->destX));
@@ -104,8 +112,8 @@ void player_check_cell(game_t* game)
     board_t* board = game->board;
     player_t* player = game->player;
 
-    int x = screen_to_board(player->x);
-    int y = screen_to_board(player->y);
+    int x = screen_to_board(player->destX);
+    int y = screen_to_board(player->destY);
 
     cell_t* cell = &board->cells[x + y * board->width];
 	
