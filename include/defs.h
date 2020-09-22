@@ -17,7 +17,7 @@
 
 #define PLAYER_START_X 16
 #define PLAYER_START_Y 19
-#define PLAYER_SPEED 96
+#define PLAYER_SPEED 200
 
 #define MAX_ENEMIES 4
 
