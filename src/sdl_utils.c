@@ -39,8 +39,8 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
 	
 	game->screen_width = dm.w;
 	game->screen_height = dm.h;
-	game->mid_ref_width = (dm.w / 2 - BOARD_WIDTH/2 * UNIT_SIZE);
-	game->mid_ref_height = (dm.h / 2 - BOARD_HEIGHT/2 * UNIT_SIZE);
+	game->mid_ref_width = (dm.w / 2 - BOARD_WIDTH/2 * UNIT_SIZE) * 1920 / dm.w;
+	game->mid_ref_height = (dm.h / 2 - BOARD_HEIGHT/2 * UNIT_SIZE) * 1080 / dm.h;
 
 
 	*window = SDL_CreateWindow("pacman",
