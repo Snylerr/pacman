@@ -73,7 +73,7 @@ void draw_debug(game_t* game)
 	SDL_DestroyTexture(texture);
 }
 
-void draw_board(game_t* game, Uint32 item_sprite_state)
+void draw_board(game_t* game, Uint32 item_render_frequency)
 {
 	board_t* board = game->board;
 	
@@ -91,7 +91,7 @@ void draw_board(game_t* game, Uint32 item_sprite_state)
 			{
 				utils_item_render_cpy(game, board->cells[j + i * board->width].item,
 										board_to_screen(j),
-										board_to_screen(i), item_sprite_state);
+										board_to_screen(i), item_render_frequency);
 			}
 		}
 	}

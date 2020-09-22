@@ -28,7 +28,7 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
         printf("Error initializing SDL video:  %s\n", SDL_GetError());
         return;
     }
-	/*
+	
     SDL_DisplayMode dm;
 
 	if (SDL_GetCurrentDisplayMode(0, &dm) != 0)
@@ -36,11 +36,11 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
 	     SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
 	     return;
 	}
-	*/
-	game->screen_width = 1920; //dm.w;
-	game->screen_height = 1080; // dm.h;
-	game->mid_ref_width =  0; //(dm.w / 2 - BOARD_WIDTH * UNIT_SIZE * 1.5f) + OFFSET;
-	game->mid_ref_height = 0; //(dm.h / 2 - BOARD_HEIGHT * UNIT_SIZE) + OFFSET;
+	
+	game->screen_width = dm.w;
+	game->screen_height = dm.h;
+	game->mid_ref_width = (dm.w / 2 - BOARD_WIDTH/2 * UNIT_SIZE);
+	game->mid_ref_height = (dm.h / 2 - BOARD_HEIGHT/2 * UNIT_SIZE);
 
 
 	*window = SDL_CreateWindow("pacman",
@@ -90,7 +90,7 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 	SDL_RenderCopyEx(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect, angle, &center, SDL_FLIP_NONE);
 }
 
-void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_sprite_state)
+void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_render_frequency)
 {
 	if (item.item_type == E_WARP)
 		return;
@@ -100,7 +100,7 @@ void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_
 	switch(item.item_type)
 	{
 		case E_PILL:
-			sprite_nb = 6;
+			sprite_nb = 8;
 			break;
 		case E_BIG_PILL:
 			sprite_nb = 4;
@@ -111,11 +111,9 @@ void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_
 
 
 
-	SDL_Rect src_rect = {item_tile.width * (item_sprite_state % sprite_nb), 0, item_tile.width, item_tile.height};
+	SDL_Rect src_rect = {item_tile.width * (item_render_frequency % sprite_nb), 0, item_tile.width, item_tile.height};
 	SDL_Rect dst_rect = {x - item_tile.width/2 + game->mid_ref_width, y - item_tile.height/2 + game->mid_ref_height, item_tile.width, item_tile.height};
 
-
-	SDL_RenderSetScale(game->draw->renderer, 2, 2);
 	SDL_RenderCopy(game->draw->renderer, item.sprite, &src_rect, &dst_rect);
 }
 
