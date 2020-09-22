@@ -24,7 +24,7 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
 
 SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface);
 
-void utils_entity_render_cpy(game_t* game, void* entity);
+void utils_entity_render_cpy(game_t* game, void* entity, Uint32 player_render_frequency);
 
 void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_render_frequency);
 

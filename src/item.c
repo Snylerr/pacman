@@ -21,7 +21,7 @@ void init_item(game_t* game, item_t* item, E_ITEM item_type, int score)
             item->tile.width = UNIT_SIZE;
             item->tile.height = UNIT_SIZE;
 
-            surface = IMG_Load("assets/pac man pill/power_pill_animated_HD.png");
+            surface = IMG_Load("assets/pac man pill/pill_animated_HD.png");
             if (surface == NULL)
                 return;
             

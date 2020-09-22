@@ -97,7 +97,7 @@ void draw_board(game_t* game, Uint32 item_render_frequency)
 	}
 }
 
-void draw_player(game_t* game)
+void draw_player(game_t* game, Uint32 player_render_frequency)
 {
-	utils_entity_render_cpy(game, game->player);
+	utils_entity_render_cpy(game, game->player, player_render_frequency);
 }

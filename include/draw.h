@@ -20,7 +20,7 @@ draw_t* create_draw(game_t* game);
 void draw_debug(game_t* game);
 
 void draw_board(game_t* game, Uint32 item_render_frequency);
-void draw_player(game_t* game);
+void draw_player(game_t* game, Uint32 player_render_frequency);
 void draw_enemies(game_t* game);
 
 

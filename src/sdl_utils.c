@@ -39,9 +39,7 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
 	
 	game->screen_width = dm.w;
 	game->screen_height = dm.h;
-	game->mid_ref_width = (dm.w / 2 - BOARD_WIDTH/2 * UNIT_SIZE) * 1920 / dm.w;
-	game->mid_ref_height = (dm.h / 2 - BOARD_HEIGHT/2 * UNIT_SIZE) * 1080 / dm.h;
-
+	
 
 	*window = SDL_CreateWindow("pacman",
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -60,7 +58,10 @@ void utils_init_window_and_renderer(game_t* game, SDL_Window** window, SDL_Rende
 		return;
 	}
 	
+	SDL_RenderSetScale(*renderer, dm.w / 1728.f, dm.h / 1080.f);
 
+	game->mid_ref_width = (dm.w / 2 - BOARD_WIDTH/2 * UNIT_SIZE * dm.w / 1728 - 5 * UNIT_SIZE);
+	game->mid_ref_height = (dm.h/ 2 - BOARD_HEIGHT/2 * UNIT_SIZE * dm.h / 1080);
 }
 
 SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface)
@@ -70,7 +71,7 @@ SDL_Texture* utils_load_texture(SDL_Renderer* renderer, SDL_Surface* surface)
 	return texture;
 }
 
-void utils_entity_render_cpy(game_t* game, void* entity)
+void utils_entity_render_cpy(game_t* game, void* entity, Uint32 player_render_frequency)
 {
 	player_t* entity_ = (player_t*)entity;
 	tile_t entity_tile = entity_->tile;
@@ -84,10 +85,11 @@ void utils_entity_render_cpy(game_t* game, void* entity)
 	
 	SDL_Point center = {entity_tile.width / 2, entity_tile.height / 2};
 
-	SDL_Rect src_rect = {0, 0, entity_tile.width, entity_tile.height};
+	SDL_Rect src_rect = {(player_render_frequency % 5) * entity_tile.width, 0, entity_tile.width, entity_tile.height};
 	SDL_Rect dst_rect = {x - entity_tile.width/2 + game->mid_ref_width, y - entity_tile.height/2 + game->mid_ref_height, entity_tile.width, entity_tile.height};
 
-	SDL_RenderCopyEx(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect, angle, &center, SDL_FLIP_NONE);
+	Uint32 flag = angle == 180 ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE;
+	SDL_RenderCopyEx(game->draw->renderer, entity_->sprite, &src_rect, &dst_rect, angle, &center, flag);
 }
 
 void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_render_frequency)
@@ -100,7 +102,7 @@ void utils_item_render_cpy(game_t* game, item_t item, int x, int y, Uint32 item_
 	switch(item.item_type)
 	{
 		case E_PILL:
-			sprite_nb = 8;
+			sprite_nb = 2;
 			break;
 		case E_BIG_PILL:
 			sprite_nb = 4;

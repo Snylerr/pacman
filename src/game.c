@@ -80,10 +80,12 @@ void game_main_loop(game_t* game)
 		
         Uint32 ticks = SDL_GetTicks();
 
-        Uint32 item_render_frequency = ticks / 166;
+        Uint32 item_render_frequency = ticks / 200;
+
+        Uint32 player_render_frequency = ticks / 200;
 
 		draw_board(game, item_render_frequency);
-		draw_player(game);
+		draw_player(game, player_render_frequency);
 		
 		if (game->input->debug)
 		{
